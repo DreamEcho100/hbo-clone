@@ -13,6 +13,19 @@
 	width: 100%;
 }
 
+.d-flex {
+	display: flex;
+}
+
+.d-flex.xy-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.d-flex.flex-column {
+	flex-direction: column;
+}
+
 /*
 .text-glow-special,
 a.text-glow-special,
