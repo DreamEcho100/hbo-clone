@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 
-import Home from '../components/Home';
+import Login from '@components/Login';
 
-const HomePage: NextPage = (): JSX.Element => {
-	return <Home />;
+const LoginPage: NextPage = (): JSX.Element => {
+	return <Login />;
 };
 
-export default HomePage;
+export default LoginPage;

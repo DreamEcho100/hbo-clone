@@ -1,19 +1,17 @@
 import MainLayout from '@components/Layouts/MainLayout';
 
 import FeaturedMedia from '@components/UI/V1/FeaturedMedia';
-import ForYouList from '@components/UI/V1/ForYouList';
-import JustAdded from '@components/UI/V1/JustAdded';
 import PosterView from '@components/UI/V1/PosterView';
+import CastInfo from '@components/UI/V1/CastInfo';
 
-const Home = (): JSX.Element => {
+const Movie = (): JSX.Element => {
 	return (
 		<MainLayout>
 			<FeaturedMedia />
-			<ForYouList />
-			<JustAdded />
 			<PosterView />
+			<CastInfo />
 		</MainLayout>
 	);
 };
 
-export default Home;
+export default Movie;

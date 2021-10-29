@@ -1,0 +1,30 @@
+.cast-info {
+	padding: 5rem;
+	color: white;
+}
+
+.group-title {
+	font-weight: 700;
+	margin: 1.5em 0;
+}
+
+.group-title:nth-child(1) {
+	margin-top: 0;
+}
+
+.list {
+	font-size: var(--size-8);
+}
+
+.crew {
+	display: flex;
+	margin-bottom: 0.5em;
+}
+.crew li:nth-child(1) {
+	margin-right: 5em;
+	color: rgb(153, 153, 153);
+	width: 20rem;
+}
+.crew li:nth-child(2) {
+	color: rgb(200, 200, 200);
+}

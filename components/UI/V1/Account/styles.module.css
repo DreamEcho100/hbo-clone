@@ -1,0 +1,198 @@
+.img-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.account {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: calc(100vh - 6rem);
+	margin-top: 6em;
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(7rem);
+	transform: translate3d(100%, 0, 0);
+	transition: transform 0.4s ease-in-out;
+	color: white;
+}
+
+.account .active {
+	transform: translate3d(0, 0, 0);
+}
+
+.details {
+	padding: 2em;
+}
+
+.title {
+	font-size: var(--size-15);
+	margin-bottom: 2em;
+}
+
+.watch-list {
+	display: grid;
+	flex-wrap: wrap;
+	grid-template-columns: 24rem 24rem 24rem;
+	gap: 2rem;
+}
+
+.watch-video {
+	position: relative;
+	width: 22rem;
+	height: 22rem;
+	/* margin-right: 2.0em; */
+}
+/* &:nth-last-child(1){
+  margin-right: 0;
+} */
+.watch-video .img-container {
+	width: 22rem;
+	height: 22rem;
+}
+.watch-video .img-container img {
+	object-fit: cover;
+	object-position: center;
+}
+
+.watch-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(
+		328deg,
+		rgba(94, 158, 255, 1) 0%,
+		rgba(119, 30, 135, 1) 100%,
+		rgba(60, 38, 184, 1) 100%,
+		rgba(0, 0, 0, 1) 100%
+	);
+	width: 100%;
+	height: 100%;
+	transition: opacity 0.4s ease-in-out;
+	opacity: 0;
+}
+.watch-overlay:hover {
+	opacity: 0.9;
+}
+
+.watch-circle {
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
+	border: 0.3rem solid white;
+	cursor: pointer;
+}
+.watch-circle:nth-child(1) {
+	margin-right: 1em;
+}
+
+.menu {
+	background: black;
+	width: 30rem;
+	padding: 2em;
+}
+
+.account li {
+	opacity: 0;
+	transition: opacity 0.4s ease-in-out;
+}
+.account li a {
+	color: rgb(80, 80, 80);
+	font-size: var(--size-9);
+	text-decoration: none;
+	display: block;
+	margin-bottom: 1em;
+	transition: color 0.2s ease-in-out;
+}
+.account li a.active,
+.account li a:hover {
+	font-weight: 500;
+	color: white;
+}
+
+/* @for $i from 0 through 20{
+    .account .active li:nth-child(#{$i + 1}){
+      transition-delay: 0.25s * $i;
+      opacity: 1;
+    }
+  } */
+
+.account .active li:nth-child(1) {
+	transition-delay: 0s;
+	opacity: 1;
+}
+.account .active li:nth-child(2) {
+	transition-delay: 0.25s;
+	opacity: 1;
+}
+.account .active li:nth-child(3) {
+	transition-delay: 0.5s;
+	opacity: 1;
+}
+.account .active li:nth-child(4) {
+	transition-delay: 0.75s;
+	opacity: 1;
+}
+.account .active li:nth-child(5) {
+	transition-delay: 1s;
+	opacity: 1;
+}
+.account .active li:nth-child(6) {
+	transition-delay: 1.25s;
+	opacity: 1;
+}
+.account .active li:nth-child(7) {
+	transition-delay: 1.5s;
+	opacity: 1;
+}
+.account .active li:nth-child(8) {
+	transition-delay: 1.75s;
+	opacity: 1;
+}
+.account .active li:nth-child(9) {
+	transition-delay: 2s;
+	opacity: 1;
+}
+.account .active li:nth-child(10) {
+	transition-delay: 2.25s;
+	opacity: 1;
+}
+.account .active li:nth-child(11) {
+	transition-delay: 2.5s;
+	opacity: 1;
+}
+.account .active li:nth-child(12) {
+	transition-delay: 2.75s;
+	opacity: 1;
+}
+.account .active li:nth-child(13) {
+	transition-delay: 3s;
+	opacity: 1;
+}
+.account .active li:nth-child(14) {
+	transition-delay: 3.25s;
+	opacity: 1;
+}
+.account .active li:nth-child(15) {
+	transition-delay: 3.5s;
+	opacity: 1;
+}
+.account .active li:nth-child(16) {
+	transition-delay: 3.75s;
+	opacity: 1;
+}
+.account .active li:nth-child(17) {
+	transition-delay: 4s;
+	opacity: 1;
+}
+.account .active li:nth-child(18) {
+	transition-delay: 4.25s;
+	opacity: 1;
+}
+.account .active li:nth-child(19) {
+	transition-delay: 4.5s;
+	opacity: 1;
+}
+.account .active li:nth-child(20) {
+	transition-delay: 4.75s;
+	opacity: 1;
+}

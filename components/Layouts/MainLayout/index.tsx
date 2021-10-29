@@ -1,11 +1,11 @@
-import Header from '.@components/UI/V1/Header/Header';
-import SideNav from '.@components/UI/V1/SideNav/SideNav';
+import Header from '@components/UI/V1/Header';
+import SideNav from '@components/UI/V1/SideNav';
 
 interface Props {
 	children: React.ReactNode;
 }
 
-const MaimLayout = ({ children }: Props): JSX.Element => {
+const MainLayout = ({ children }: Props): JSX.Element => {
 	return (
 		<div
 			style={{
@@ -17,9 +17,9 @@ const MaimLayout = ({ children }: Props): JSX.Element => {
 		>
 			<Header />
 			<SideNav />
-			<section className='content-container'>{children}</section>
+			<main className='content-container'>{children}</main>
 		</div>
 	);
 };
 
-export default MaimLayout;
+export default MainLayout;

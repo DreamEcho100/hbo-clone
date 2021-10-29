@@ -13,16 +13,20 @@
 	width: 100%;
 }
 
-.d-flex {
+.dFlex {
 	display: flex;
 }
 
-.d-flex.xy-center {
+.flexWrap {
+	flex-wrap: wrap;
+}
+
+.dFlex.xyCenter {
 	align-items: center;
 	justify-content: center;
 }
 
-.d-flex.flex-column {
+.dFlex.flexColumn {
 	flex-direction: column;
 }
 
