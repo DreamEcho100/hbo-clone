@@ -1,11 +1,22 @@
+import Login from '@components/UI/V1/Login';
+
+interface Props {}
+
+const Root = (props: Props): JSX.Element => {
+	return <Login />;
+};
+
+export default Root;
+
+/*
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
-const Login = (): JSX.Element => {
+const Root = (): JSX.Element => {
 	return (
 		<div
 			className={joinClassNames(
@@ -71,4 +82,5 @@ const Login = (): JSX.Element => {
 	);
 };
 
-export default Login;
+export default Root;
+*/

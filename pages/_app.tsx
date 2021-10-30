@@ -3,9 +3,11 @@ import Head from 'next/head';
 
 import '@styles/globals.css';
 
+import { SharedHBOStateProvider as Provider } from '@store/HBOProvider';
+
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<>
+		<Provider>
 			<Head>
 				<meta charSet='UTF-8' />
 				<meta httpEquiv='X-UA-Compatible' content='IE=edge' />
@@ -15,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>HBO Clone</title>
 			</Head>
 			<Component {...pageProps} />
-		</>
+		</Provider>
 	);
 }
 

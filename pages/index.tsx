@@ -1,9 +1,25 @@
+import { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import type { NextPage } from 'next';
 
-import Login from '@components/Login';
+import { useSharedHBOState } from '@store/HBOProvider';
 
-const LoginPage: NextPage = (): JSX.Element => {
-	return <Login />;
+import Root from '@components/Root';
+
+const RootPage: NextPage = (): JSX.Element => {
+	const router = useRouter();
+	const routerPush = useCallback((dist) => router.push(dist), [router]);
+
+	const [globalState, globalDispatch] = useSharedHBOState();
+
+	useEffect(() => {
+		const loggedIn = false;
+		if (loggedIn === false) {
+			routerPush('/create');
+		}
+	}, [routerPush]);
+
+	return <Root />;
 };
 
-export default LoginPage;
+export default RootPage;

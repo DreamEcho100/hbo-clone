@@ -1,7 +1,7 @@
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
@@ -18,7 +18,7 @@ const loopComp = (comp: JSX.Element, digit: number): JSX.Element[] => {
 
 const PosterView = (props: Props): JSX.Element => {
 	return (
-		<div className={classes['poster-view']}>
+		<section className={classes['poster-view']}>
 			<h3 className={classes.title}>Just Added</h3>
 			<div className={joinClassNames(helpers.dFlex, classes.thumbnails)}>
 				{loopComp(
@@ -41,7 +41,7 @@ const PosterView = (props: Props): JSX.Element => {
 					10
 				)}
 			</div>
-		</div>
+		</section>
 	);
 };
 

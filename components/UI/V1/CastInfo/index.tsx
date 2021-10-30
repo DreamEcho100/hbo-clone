@@ -1,13 +1,13 @@
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 interface Props {}
 
 const CastInfo = (props: Props) => {
 	return (
-		<div className={classes['cast-info']}>
+		<section className={classes['cast-info']}>
 			<h4 className={classes['group-title']}>Cast & Crew</h4>
 			<div className={classes.list}>
 				<ul className={classes.crew}>
@@ -38,7 +38,7 @@ const CastInfo = (props: Props) => {
 					<li>George Lucas</li>
 				</ul>
 			</div>
-		</div>
+		</section>
 	);
 };
 

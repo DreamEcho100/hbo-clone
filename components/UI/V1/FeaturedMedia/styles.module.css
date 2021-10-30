@@ -62,7 +62,7 @@
 	width: 5rem;
 	height: 5rem;
 	border-radius: 50%;
-	margin-right: 2em;
+	margin-right: 1em;
 	transition: background-color 0.3s ease-in-out;
 }
 .play-btn:hover {
@@ -78,10 +78,10 @@
 }
 
 .info-btn {
-	padding: 0.5em 0.5em;
-	background: grey;
+	padding: 0.7em;
+	background: rgb(62 62 62);
 	color: white;
 	font-weight: 700;
-	border-radius: 1rem;
+	border-radius: 2rem;
 	cursor: pointer;
 }

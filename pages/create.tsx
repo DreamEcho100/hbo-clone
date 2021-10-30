@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 
-import CreateUser from '@components/CreateUser';
+import Create from '@components/Create';
 
 const CreateUserPage: NextPage = (): JSX.Element => {
-	return <CreateUser />;
+	return <Create />;
 };
 
 export default CreateUserPage;

@@ -1,13 +1,13 @@
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 interface Props {}
 
 const FeaturedMedia = (props: Props): JSX.Element => {
 	return (
-		<div className={classes['featured-media']}>
+		<section className={classes['featured-media']}>
 			<iframe
 				className={classes.video}
 				width='100%'
@@ -52,7 +52,7 @@ const FeaturedMedia = (props: Props): JSX.Element => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

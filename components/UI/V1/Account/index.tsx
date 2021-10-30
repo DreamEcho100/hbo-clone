@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
@@ -20,7 +20,7 @@ const loopComp = (comp: JSX.Element, digit: number): JSX.Element[] => {
 
 const Account = (props: Props): JSX.Element => {
 	return (
-		<div className={joinClassNames(helpers.dFlex, classes.account)}>
+		<section className={joinClassNames(helpers.dFlex, classes.account)}>
 			<div className={classes.details}>
 				<div className={classes.title}>My List</div>
 				<div className={classes['watch-list']}>
@@ -76,7 +76,7 @@ const Account = (props: Props): JSX.Element => {
 					</li>
 				</ul>
 			</div>
-		</div>
+		</section>
 	);
 };
 

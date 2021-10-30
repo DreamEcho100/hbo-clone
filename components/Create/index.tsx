@@ -1,11 +1,27 @@
+import { ChangeEvent } from 'react';
+
+import { useSharedHBOState } from '@store/HBOProvider';
+import { createUser } from '@store/HBOProvider/actions';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
 const CreateUser = (): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+	console.log('globalState', globalState);
+
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		createUser({
+			dispatch: globalDispatch,
+			user: {
+				name: event.target.value,
+			},
+		});
+	};
+
 	return (
 		<div
 			className={joinClassNames(
@@ -35,7 +51,7 @@ const CreateUser = (): JSX.Element => {
 			>
 				<Image
 					className={classes['img-container']}
-					src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+					src={globalState.defaultUserImg} // 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
 					alt=''
 				/>
 				<div
@@ -53,6 +69,8 @@ const CreateUser = (): JSX.Element => {
 							name='user-name'
 							id='user-name-input-text'
 							className={classes['user-name']}
+							value={globalState.user.name}
+							onChange={handleChange}
 						/>
 						<label htmlFor='user-name-input-text'>Name</label>
 					</div>

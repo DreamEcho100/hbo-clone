@@ -1,7 +1,7 @@
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
-import helpers from '@components/Styles/V1/helpers.module.css';
+import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 import Account from '../Account';

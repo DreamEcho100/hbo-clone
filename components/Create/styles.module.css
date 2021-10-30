@@ -76,7 +76,8 @@
 	margin: 0 0.25em;
 	margin-bottom: 1em;
 	outline: rgba(255, 255, 255, 0.1);
-	font-size: var(--size-8);
+	font-size: var(--size-10);
+	color: white;
 	transition: margin 0.3s ease-in;
 }
 .form-control input.user-name:focus-within {
