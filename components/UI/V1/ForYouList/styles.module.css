@@ -54,9 +54,9 @@
 	opacity: 0;
 	transition: opacity 0.4s ease-in-out;
 }
-.top-layer .fa-play {
+.top-layer :global(.fa-play) {
 	color: white;
-	font-size: var(--size-20);
+	font-size: 7rem;
 	transform: translate3d(0, 10rem, 0);
 	opacity: 0;
 	transition: all 0.3s ease-in-out 0.2s;
@@ -65,7 +65,7 @@
 	opacity: 0.9;
 	cursor: pointer;
 }
-.top-layer:hover .fa-play {
+.top-layer:hover :global(.fa-play) {
 	transform: translate3d(0, 0, 0);
 	opacity: 1;
 }

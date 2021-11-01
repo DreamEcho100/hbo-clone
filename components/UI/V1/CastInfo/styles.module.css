@@ -17,7 +17,6 @@
 }
 
 .crew {
-	display: flex;
 	margin-bottom: 0.5em;
 }
 .crew li:nth-child(1) {
