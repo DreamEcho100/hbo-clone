@@ -4,17 +4,9 @@ import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
+import React from 'react';
 
 interface Props {}
-
-const loopComp = (comp: JSX.Element, digit: number): JSX.Element[] => {
-	let thumbnails = [];
-	for (let index = 1; index <= digit; index++) {
-		thumbnails.push(comp);
-	}
-
-	return thumbnails;
-};
 
 const SearchModal = (props: Props): JSX.Element => {
 	return (
@@ -24,6 +16,7 @@ const SearchModal = (props: Props): JSX.Element => {
 					helpers.dFlex,
 					helpers.xyCenter,
 					classes['input-group']
+					// classes.active
 				)}
 			>
 				<input
@@ -46,8 +39,8 @@ const SearchModal = (props: Props): JSX.Element => {
 					classes.thumbnails
 				)}
 			>
-				{loopComp(
-					<div className={classes.thumbnail}>
+				{new Array(10).fill(null).map((item, index) => (
+					<div key={index} className={classes.thumbnail}>
 						<Image
 							className={classes['img-container']}
 							src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
@@ -62,9 +55,8 @@ const SearchModal = (props: Props): JSX.Element => {
 						>
 							<i className='fas fa-play' />
 						</div>
-					</div>,
-					10
-				)}
+					</div>
+				))}
 			</div>
 		</section>
 	);

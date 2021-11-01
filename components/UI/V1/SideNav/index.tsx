@@ -16,7 +16,13 @@ const SideNav = (props: Props): JSX.Element => {
 				classes['side-nav']
 			)}
 		>
-			<div className={classes['close-btn']}>
+			<div
+				className={joinClassNames(
+					helpers.dFlex,
+					helpers.xyCenter,
+					classes['close-btn']
+				)}
+			>
 				<i className='fas fa-times' />
 			</div>
 			<ul className={classes.main}>

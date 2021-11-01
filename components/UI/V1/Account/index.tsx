@@ -9,23 +9,14 @@ import Image from '@components/UI/V1/Image';
 
 interface Props {}
 
-const loopComp = (comp: JSX.Element, digit: number): JSX.Element[] => {
-	let thumbnails = [];
-	for (let index = 1; index <= digit; index++) {
-		thumbnails.push(comp);
-	}
-
-	return thumbnails;
-};
-
 const Account = (props: Props): JSX.Element => {
 	return (
 		<section className={joinClassNames(helpers.dFlex, classes.account)}>
 			<div className={classes.details}>
 				<div className={classes.title}>My List</div>
 				<div className={classes['watch-list']}>
-					{loopComp(
-						<div className={classes['watch-video']}>
+					{new Array(6).fill(null).map((item, index) => (
+						<div key={index} className={classes['watch-video']}>
 							<Image
 								className={classes['img-container']}
 								src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
@@ -48,14 +39,19 @@ const Account = (props: Props): JSX.Element => {
 									>
 										<i className='fas fa-play' />
 									</div>
-									<div className={classes['watch-circle']}>
+									<div
+										className={joinClassNames(
+											helpers.dFlex,
+											helpers.xyCenter,
+											classes['watch-circle']
+										)}
+									>
 										<i className='fas fa-times' />
 									</div>
 								</div>
 							</div>
-						</div>,
-						6
-					)}
+						</div>
+					))}
 				</div>
 			</div>
 			<div className={classes.menu}>

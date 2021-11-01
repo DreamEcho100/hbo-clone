@@ -1,3 +1,4 @@
+// import React from 'react';
 import Image from 'next/image';
 
 import classes from './styles.module.css';
@@ -16,9 +17,9 @@ const ImageComponent = ({
 	layout = 'fill',
 	src,
 	alt = '',
-}: Props) => {
+}: Props): JSX.Element => {
 	const wrapperProps = {
-		className: `${className} ${classes['img-container']}`,
+		className: `${className} ${classes['img-container']} ${classes['layout-fill']}`,
 	};
 	const imageProps = {
 		unoptimized,

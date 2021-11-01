@@ -16,7 +16,7 @@
 	color: white;
 }
 
-.account .active {
+.account.active {
 	transform: translate3d(0, 0, 0);
 }
 
@@ -110,89 +110,89 @@
 }
 
 /* @for $i from 0 through 20{
-    .account .active li:nth-child(#{$i + 1}){
+    .account.active li:nth-child(#{$i + 1}){
       transition-delay: 0.25s * $i;
       opacity: 1;
     }
   } */
 
-.account .active li:nth-child(1) {
+.account.active li:nth-child(1) {
 	transition-delay: 0s;
 	opacity: 1;
 }
-.account .active li:nth-child(2) {
+.account.active li:nth-child(2) {
 	transition-delay: 0.25s;
 	opacity: 1;
 }
-.account .active li:nth-child(3) {
+.account.active li:nth-child(3) {
 	transition-delay: 0.5s;
 	opacity: 1;
 }
-.account .active li:nth-child(4) {
+.account.active li:nth-child(4) {
 	transition-delay: 0.75s;
 	opacity: 1;
 }
-.account .active li:nth-child(5) {
+.account.active li:nth-child(5) {
 	transition-delay: 1s;
 	opacity: 1;
 }
-.account .active li:nth-child(6) {
+.account.active li:nth-child(6) {
 	transition-delay: 1.25s;
 	opacity: 1;
 }
-.account .active li:nth-child(7) {
+.account.active li:nth-child(7) {
 	transition-delay: 1.5s;
 	opacity: 1;
 }
-.account .active li:nth-child(8) {
+.account.active li:nth-child(8) {
 	transition-delay: 1.75s;
 	opacity: 1;
 }
-.account .active li:nth-child(9) {
+.account.active li:nth-child(9) {
 	transition-delay: 2s;
 	opacity: 1;
 }
-.account .active li:nth-child(10) {
+.account.active li:nth-child(10) {
 	transition-delay: 2.25s;
 	opacity: 1;
 }
-.account .active li:nth-child(11) {
+.account.active li:nth-child(11) {
 	transition-delay: 2.5s;
 	opacity: 1;
 }
-.account .active li:nth-child(12) {
+.account.active li:nth-child(12) {
 	transition-delay: 2.75s;
 	opacity: 1;
 }
-.account .active li:nth-child(13) {
+.account.active li:nth-child(13) {
 	transition-delay: 3s;
 	opacity: 1;
 }
-.account .active li:nth-child(14) {
+.account.active li:nth-child(14) {
 	transition-delay: 3.25s;
 	opacity: 1;
 }
-.account .active li:nth-child(15) {
+.account.active li:nth-child(15) {
 	transition-delay: 3.5s;
 	opacity: 1;
 }
-.account .active li:nth-child(16) {
+.account.active li:nth-child(16) {
 	transition-delay: 3.75s;
 	opacity: 1;
 }
-.account .active li:nth-child(17) {
+.account.active li:nth-child(17) {
 	transition-delay: 4s;
 	opacity: 1;
 }
-.account .active li:nth-child(18) {
+.account.active li:nth-child(18) {
 	transition-delay: 4.25s;
 	opacity: 1;
 }
-.account .active li:nth-child(19) {
+.account.active li:nth-child(19) {
 	transition-delay: 4.5s;
 	opacity: 1;
 }
-.account .active li:nth-child(20) {
+.account.active li:nth-child(20) {
 	transition-delay: 4.75s;
 	opacity: 1;
 }
