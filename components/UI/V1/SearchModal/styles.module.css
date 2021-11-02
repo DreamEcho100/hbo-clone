@@ -1,11 +1,13 @@
 .search-modal {
+	overflow-y: auto;
+	overflow-x: hidden;
 	position: fixed;
 	background: black;
 	height: 100vh;
 	width: 100%;
 	top: 0;
 	left: 0;
-	padding: 2em 0 2em 3em;
+	padding: 1em 0 1em 1em;
 	opacity: 0;
 	/* visibility: hidden; */
 	pointer-events: none;
@@ -20,7 +22,8 @@
 }
 
 .input-group {
-	margin-bottom: 3em;
+	margin: 1.5em 0 2.5em 0;
+	color: white;
 }
 
 .input {
@@ -42,11 +45,13 @@
 }
 
 .title {
-	font-size: var(--size-9);
-	margin-bottom: 1.5em;
+	margin-bottom: 1em;
 }
 
 .thumbnails {
+	justify-content: space-around;
+	align-items: center;
+
 	min-width: 100%;
 	width: calc(100vw - 7rem);
 	overflow-x: scroll;
@@ -59,9 +64,15 @@
 	width: 24rem;
 	height: 36rem;
 	position: relative;
-	margin-right: 1em;
+	margin: 0.5em;
+	margin-left: 0;
 	opacity: 0;
 }
+body[dir='rtl'] .thumbnail {
+	margin-left: 0;
+	margin-right: 0.5em;
+}
+
 .thumbnail .img-container {
 	width: 24rem;
 	height: 36rem;
@@ -113,7 +124,6 @@
   }
 } */
 
-/*
 .search-modal.active .thumbnail:nth-child(1) {
 	opacity: 1;
 	transition-delay: 0s;
@@ -194,4 +204,3 @@
 	opacity: 1;
 	transition-delay: 2.85s;
 }
-*/

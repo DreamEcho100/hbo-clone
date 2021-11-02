@@ -4,16 +4,19 @@
 }
 
 .account {
+	width: 100%;
 	position: absolute;
 	top: 0;
 	right: 0;
-	height: calc(100vh - 6rem);
-	margin-top: 6em;
+	height: calc(100vh - 3.5rem);
+	margin-top: 3.5em;
 	background: rgba(0, 0, 0, 0.3);
 	backdrop-filter: blur(7rem);
 	transform: translate3d(100%, 0, 0);
 	transition: transform 0.4s ease-in-out;
 	color: white;
+
+	--menu-width: 22rem;
 }
 
 .account.active {
@@ -22,6 +25,8 @@
 
 .details {
 	padding: 2em;
+	overflow-y: auto;
+	min-width: calc(100% - var(--menu-width));
 }
 
 .title {
@@ -31,8 +36,8 @@
 
 .watch-list {
 	display: grid;
-	flex-wrap: wrap;
-	grid-template-columns: 24rem 24rem 24rem;
+	/* grid-template-columns: 24rem 24rem 24rem; */
+	grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
 	gap: 2rem;
 }
 
@@ -87,7 +92,7 @@
 
 .menu {
 	background: black;
-	width: 30rem;
+	width: var(--menu-width);
 	padding: 2em;
 }
 

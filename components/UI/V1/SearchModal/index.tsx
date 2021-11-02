@@ -10,13 +10,12 @@ interface Props {}
 
 const SearchModal = (props: Props): JSX.Element => {
 	return (
-		<section className={classes['search-modal']}>
+		<section className={`${classes['search-modal']}`}>
 			<div
 				className={joinClassNames(
 					helpers.dFlex,
 					helpers.xyCenter,
 					classes['input-group']
-					// classes.active
 				)}
 			>
 				<input
@@ -43,7 +42,7 @@ const SearchModal = (props: Props): JSX.Element => {
 					<div key={index} className={classes.thumbnail}>
 						<Image
 							className={classes['img-container']}
-							src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+							src='https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/88997/93196/Avengers-Endgame-Final-Style-Poster-buy-original-movie-posters-at-starstills__42370.1563973516.jpg?c=2?imbypass=on'
 							alt=''
 						/>
 						<div

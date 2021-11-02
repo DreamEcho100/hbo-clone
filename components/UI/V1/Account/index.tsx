@@ -19,7 +19,7 @@ const Account = (props: Props): JSX.Element => {
 						<div key={index} className={classes['watch-video']}>
 							<Image
 								className={classes['img-container']}
-								src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+								src='https://cdn.shopify.com/s/files/1/0013/2874/2466/products/rick-and-morty-tv-invasion-poster-24-x-36-581_1024x.jpg?v=1616627934'
 								alt=''
 							/>
 							<div
@@ -54,7 +54,7 @@ const Account = (props: Props): JSX.Element => {
 					))}
 				</div>
 			</div>
-			<div className={classes.menu}>
+			<nav className={classes.menu}>
 				<ul className={classes.main}>
 					<li>
 						<Link href='/'>
@@ -62,7 +62,7 @@ const Account = (props: Props): JSX.Element => {
 						</Link>
 					</li>
 				</ul>
-				<div className='side-nav__divider' />
+				<div className={classes.divider} />
 				<ul className='main'>
 					<li>
 						<Link href='/'>Account</Link>
@@ -71,7 +71,7 @@ const Account = (props: Props): JSX.Element => {
 						<Link href='/'>Sign Out</Link>
 					</li>
 				</ul>
-			</div>
+			</nav>
 		</section>
 	);
 };
