@@ -1,4 +1,8 @@
 import { ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+import { v4 } from 'uuid';
+
+import ls from '@utils/v1/localStorage';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { createUser } from '@store/HBOProvider/actions';
@@ -11,7 +15,7 @@ import Image from '@components/UI/V1/Image';
 
 const CreateUser = (): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
-	console.log('globalState', globalState);
+	const router = useRouter();
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		createUser({
@@ -20,6 +24,33 @@ const CreateUser = (): JSX.Element => {
 				name: event.target.value,
 			},
 		});
+	};
+
+	const saveUser = (event: React.SyntheticEvent) => {
+		event.preventDefault;
+
+		let users: any[] = ls.check('users') ? ls.get('users') : [],
+			user;
+
+		if (users.length < 1) {
+			user = {
+				id: v4(),
+				name: globalState.user.name,
+				myListID: [],
+			};
+			users.push(user);
+			ls.set('users', users);
+			router.push('/login');
+		} else {
+			user = {
+				id: v4(),
+				name: globalState.user.name,
+				myListID: [],
+			};
+			users.push(user);
+			ls.set('users', users);
+			router.push('/login');
+		}
 	};
 
 	return (
@@ -127,10 +158,8 @@ const CreateUser = (): JSX.Element => {
 					classes.buttons
 				)}
 			>
-				<button className={classes.cancel} type='submit'>
-					Cancel
-				</button>
-				<button className={classes.save} type='submit'>
+				<button className={classes.cancel}>Cancel</button>
+				<button className={classes.save} onClick={saveUser}>
 					Save
 				</button>
 			</footer>

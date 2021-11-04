@@ -1,9 +1,20 @@
-import Login from '@components/UI/V1/Login';
+import MainLayout from '@components/Layouts/MainLayout';
+import FeaturedMedia from '@components/UI/V1/FeaturedMedia';
+import ForYouList from '@components/UI/V1/ForYouList';
+import JustAdded from '@components/UI/V1/JustAdded';
+import PosterView from '@components/UI/V1/PosterView';
 
 interface Props {}
 
 const Root = (props: Props): JSX.Element => {
-	return <Login />;
+	return (
+		<MainLayout>
+			<FeaturedMedia />
+			<ForYouList />
+			<JustAdded />
+			<PosterView />
+		</MainLayout>
+	);
 };
 
 export default Root;

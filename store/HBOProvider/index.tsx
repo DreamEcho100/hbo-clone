@@ -51,7 +51,6 @@ export function HBOProvider({ children }) {
 	const defaultUserImg = 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg';
 	const createUserAction = (e) => {
 		setUser(e.target.value);
-		console.log(user);
 	};
 
 	return (

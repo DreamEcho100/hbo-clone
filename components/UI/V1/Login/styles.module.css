@@ -37,12 +37,13 @@
 	max-width: 100%;
 }
 
-.box {
+.user-box {
 	cursor: pointer;
+	margin: 0.5em;
 }
-.box:nth-child(1) {
+/* .user-box:nth-child(1) {
 	margin-right: 3em;
-}
+} */
 
 .user-img {
 	width: 12.5rem;

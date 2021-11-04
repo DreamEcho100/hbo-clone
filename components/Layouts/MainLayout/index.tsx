@@ -2,7 +2,7 @@ import Header from '@components/UI/V1/Header';
 import SideNav from '@components/UI/V1/SideNav';
 
 interface Props {
-	children: React.ReactNode;
+	children: JSX.Element[];
 }
 
 const MainLayout = ({ children }: Props): JSX.Element => {
