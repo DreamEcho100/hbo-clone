@@ -5,4 +5,3 @@ export type dispatchType =
 	| React.Dispatch<ACTION_TYPE>
 	| ((value: ACTION_TYPE) => void);
 export type userType = InitialStateInterface['user'];
-export type defaultUserImgType = InitialStateInterface['defaultUserImg'];

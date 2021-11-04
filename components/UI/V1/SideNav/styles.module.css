@@ -6,7 +6,12 @@
 	min-height: 100vh;
 	padding: 1em;
 	z-index: 11;
+	overflow-y: auto;
+	max-height: 100%;
+	max-width: 100%;
 	/* transform: translate3d(-35rem, 0, 0); */
+	align-items: flex-start;
+	justify-content: center;
 	transform: translate3d(-100%, 0, 0);
 	transition: transform 0.4s ease-in-out;
 }
@@ -40,7 +45,7 @@
 	top: 0;
 	height: 5rem;
 	width: 5rem;
-	font-size: var(--size-8);
+	font-size: var(--size-13);
 	cursor: pointer;
 	color: white;
 }

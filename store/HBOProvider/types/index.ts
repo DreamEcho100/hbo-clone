@@ -1,6 +1,10 @@
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 
+export const TOGGLE_ACCOUNT_MODEL_DISPLAY = 'TOGGLE_ACCOUNT_MODEL_DISPLAY';
+export const TOGGLE_SIDE_NAV = 'TOGGLE_SIDE_NAV';
+export const TOGGLE_SEARCH_MODAL = 'TOGGLE_SEARCH_MODAL';
+
 // enum types {
 // 	ADD_USER = 'ADD_USER',
 // 	REMOVE_USER = 'REMOVE_USER',

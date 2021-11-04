@@ -155,7 +155,8 @@ body {
 	margin: auto;
 	font-family: 'Noto Sans', 'HelveticaNeue-Light', 'Helvetica Neue Light',
 		'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-	line-height: 1;
+	/* line-height: 1; */
+	line-height: 1.75;
 }
 
 #__next {

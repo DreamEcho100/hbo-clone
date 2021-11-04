@@ -1,3 +1,9 @@
+import { useSharedHBOState } from '@store/HBOProvider';
+import {
+	toggleAccountModelDisplay,
+	toggleSearchModalDisplay,
+	toggleSideNavDisplay,
+} from '@store/HBOProvider/actions';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
@@ -6,17 +12,36 @@ import helpers from '@styles/helpers.module.css';
 import Image from '@components/UI/V1/Image';
 import Account from '../Account';
 import SearchModal from '../SearchModal';
+import { useMemo } from 'react';
 
 interface Props {}
 
 const Header = (props: Props): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+
+	const isMenuOpened =
+		globalState.app.showAccountModal || globalState.app.showSideNav;
+	const isMenuOpenedMemo = useMemo(() => isMenuOpened, [isMenuOpened]);
+
 	return (
-		<header className={joinClassNames(helpers.dFlex, classes.header)}>
+		<header
+			className={joinClassNames(
+				helpers.dFlex,
+				classes.header,
+				isMenuOpenedMemo ? classes['menu-open'] : ''
+			)}
+		>
 			<div className={joinClassNames(helpers.dFlex, classes['left-side'])}>
-				<div className={classes['menu-btn']}>
+				<div
+					className={classes['menu-btn']}
+					onClick={() => toggleSideNavDisplay({ dispatch: globalDispatch })}
+				>
 					<i className='fas fa-bars' />
 				</div>
-				<div className={classes['search-btn']}>
+				<div
+					className={classes['search-btn']}
+					onClick={() => toggleSearchModalDisplay({ dispatch: globalDispatch })}
+				>
 					<i className='fas fa-search' />
 				</div>
 			</div>
@@ -27,6 +52,7 @@ const Header = (props: Props): JSX.Element => {
 					helpers.xyCenter,
 					classes.account
 				)}
+				onClick={() => toggleAccountModelDisplay({ dispatch: globalDispatch })}
 			>
 				<Image
 					className={classes['user-img']}

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { useSharedHBOState } from '@store/HBOProvider';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
@@ -10,8 +11,16 @@ import Image from '@components/UI/V1/Image';
 interface Props {}
 
 const Account = (props: Props): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+
 	return (
-		<section className={joinClassNames(helpers.dFlex, classes.account)}>
+		<section
+			className={joinClassNames(
+				helpers.dFlex,
+				classes.account,
+				globalState.app.showAccountModal ? classes.active : ''
+			)}
+		>
 			<div className={classes.details}>
 				<div className={classes.title}>My List</div>
 				<div className={classes['watch-list']}>

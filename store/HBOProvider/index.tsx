@@ -6,8 +6,13 @@ import { InitialStateInterface } from './ts/interfaces';
 export const initialState: InitialStateInterface = {
 	user: {
 		name: '',
+		defaultImg: 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg',
 	},
-	defaultUserImg: 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg',
+	app: {
+		showAccountModal: false,
+		showSideNav: false,
+		showSearchModal: false,
+	},
 };
 
 const useHBOState = () => useReducer(reducer, initialState);

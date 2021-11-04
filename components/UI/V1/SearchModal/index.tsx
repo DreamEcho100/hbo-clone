@@ -1,3 +1,5 @@
+import { useSharedHBOState } from '@store/HBOProvider';
+import { toggleSearchModalDisplay } from '@store/HBOProvider/actions';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import classes from './styles.module.css';
@@ -9,8 +11,15 @@ import React from 'react';
 interface Props {}
 
 const SearchModal = (props: Props): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+
 	return (
-		<section className={`${classes['search-modal']}`}>
+		<section
+			className={joinClassNames(
+				classes['search-modal'],
+				globalState.app.showSearchModal ? classes.active : ''
+			)}
+		>
 			<div
 				className={joinClassNames(
 					helpers.dFlex,
@@ -24,7 +33,10 @@ const SearchModal = (props: Props): JSX.Element => {
 					placeholder='search for a title'
 					value=''
 				/>
-				<div className={classes['close-btn']}>
+				<div
+					className={classes['close-btn']}
+					onClick={() => toggleSearchModalDisplay({ dispatch: globalDispatch })}
+				>
 					<i className='fas fa-times' />
 				</div>
 			</div>
