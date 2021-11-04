@@ -12,23 +12,20 @@ import helpers from '@styles/helpers.module.css';
 import Image from '@components/UI/V1/Image';
 import Account from '../Account';
 import SearchModal from '../SearchModal';
-import { useMemo } from 'react';
 
 interface Props {}
 
 const Header = (props: Props): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
 
-	const isMenuOpened =
-		globalState.app.showAccountModal || globalState.app.showSideNav;
-	const isMenuOpenedMemo = useMemo(() => isMenuOpened, [isMenuOpened]);
-
 	return (
 		<header
 			className={joinClassNames(
 				helpers.dFlex,
 				classes.header,
-				isMenuOpenedMemo ? classes['menu-open'] : ''
+				globalState.app.showAccountModal || globalState.app.showSideNav
+					? classes['menu-open']
+					: ''
 			)}
 		>
 			<div className={joinClassNames(helpers.dFlex, classes['left-side'])}>
