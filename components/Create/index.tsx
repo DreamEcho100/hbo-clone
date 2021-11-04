@@ -22,6 +22,7 @@ const CreateUser = (): JSX.Element => {
 			dispatch: globalDispatch,
 			user: {
 				name: event.target.value,
+				defaultImg: '',
 			},
 		});
 	};
@@ -77,12 +78,16 @@ const CreateUser = (): JSX.Element => {
 				className={joinClassNames(
 					helpers.dFlex,
 					helpers.xyCenter,
+					helpers.flexWrap,
 					classes.form
 				)}
 			>
 				<Image
 					className={classes['img-container']}
-					src={globalState.defaultUserImg} // 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+					src={
+						globalState.user.defaultImg ||
+						'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+					}
 					alt=''
 				/>
 				<div
