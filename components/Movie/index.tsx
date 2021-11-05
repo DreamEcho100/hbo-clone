@@ -1,14 +1,12 @@
 import MainLayout from '@components/Layouts/MainLayout';
 
-import FeaturedMedia from '@components/UI/V1/FeaturedMedia';
-import PosterView from '@components/UI/V1/PosterView';
+import MediaRow from '@components/UI/V1/MediaRow';
 import CastInfo from '@components/UI/V1/CastInfo';
 
 const Movie = (): JSX.Element => {
 	return (
 		<MainLayout>
-			<FeaturedMedia />
-			<PosterView />
+			<MediaRow title='Movies' type='small-v' endpoint='api/movies/234' />
 			<CastInfo />
 		</MainLayout>
 	);
