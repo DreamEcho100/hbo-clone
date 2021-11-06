@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { toggleSideNavDisplay } from '@store/HBOProvider/actions';
-import { joinClassNames } from '@utils/v1/ClassName';
+import { joinClassNames } from '@utils/v1/className';
 
 import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';

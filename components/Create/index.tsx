@@ -6,7 +6,7 @@ import ls from '@utils/v1/localStorage';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { createUser } from '@store/HBOProvider/actions';
-import { joinClassNames } from '@utils/v1/ClassName';
+import { joinClassNames } from '@utils/v1/className';
 
 import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';

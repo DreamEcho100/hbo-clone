@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import classes from './styles.module.css';
 
 import { shuffleArray } from '@utils/v1/arrays';
-import { joinClassNames } from '@utils/v1/ClassName';
+import { joinClassNames } from '@utils/v1/className';
 
 import helpers from '@styles/helpers.module.css';
 

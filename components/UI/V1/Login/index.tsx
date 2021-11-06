@@ -8,7 +8,7 @@ import useMounted from '@hooks/useMounted';
 import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';
 
-import { joinClassNames } from '@utils/v1/ClassName';
+import { joinClassNames } from '@utils/v1/className';
 
 import Image from '@components/UI/V1/Image';
 
