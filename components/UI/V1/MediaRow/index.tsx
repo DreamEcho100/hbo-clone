@@ -9,6 +9,8 @@ import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
+type thumbnailType = 'large-v' | 'small-v' | 'large-h' | 'small-h';
+
 type GenresUnits =
 	| 'Action'
 	| 'Adventure'
@@ -44,18 +46,20 @@ interface MediaRowPropsInterface {
 		with_watch_monetization_types?: string;
 	};
 	title: string;
-	type: string;
+	type: thumbnailType;
 }
 
 interface ThumbnailPropsInterface {
 	movieData: {
 		poster_path: string;
 	};
+	type: thumbnailType;
 }
 
 interface ShowThumbnailsPropsInterface {
 	loadingData: boolean;
 	movies: JSX.Element[];
+	type: thumbnailType;
 }
 
 interface handleQueryFiltersInterface {
@@ -65,6 +69,7 @@ interface handleQueryFiltersInterface {
 const ShowThumbnails = ({
 	loadingData,
 	movies,
+	type,
 }: ShowThumbnailsPropsInterface): JSX.Element =>
 	loadingData ? (
 		<>
@@ -75,20 +80,32 @@ const ShowThumbnails = ({
 	) : (
 		<>
 			{movies.map((movie: any, index) => {
-				return <Thumbnail key={index} movieData={movie} />;
+				return <Thumbnail key={index} movieData={movie} type={type} />;
 			})}
 		</>
 	);
 
 const Thumbnail /*: React.FunctionComponent<ThumbnailPropsInterface>*/ = ({
 	movieData,
+	type,
 }: ThumbnailPropsInterface) => {
+	const thumbSize = (type: thumbnailType) =>
+		({
+			'large-v': '400',
+			'small-v': '185',
+			'large-h': '500',
+			'small-h': '342',
+		}[type]); // original
+
 	return (
 		<div className={classes.thumbnail}>
 			<Image
-				src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`}
+				src={`https://image.tmdb.org/t/p/w${thumbSize(type)}${
+					movieData.poster_path
+				}`}
 				alt=''
 				className={classes['img-container']}
+				placeholder='blur'
 			/>
 			<div
 				className={joinClassNames(
@@ -158,7 +175,7 @@ const MediaRow = ({
 		<div className={`${classes['media-row']} ${classes[type]}`}>
 			<h3 className={classes.title}>{title}</h3>
 			<div className={joinClassNames(helpers.dFlex, classes.thumbnails)}>
-				<ShowThumbnails loadingData={loadingData} movies={movies} />
+				<ShowThumbnails loadingData={loadingData} movies={movies} type={type} />
 
 				{/* {loopComp(
             (<Thumbnail />), 10
