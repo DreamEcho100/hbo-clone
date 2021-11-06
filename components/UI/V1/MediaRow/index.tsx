@@ -169,7 +169,7 @@ const MediaRow = ({
 				console.error('Error Response For ' + title);
 				console.error(error);
 			});
-	}, [title]);
+	}, [title, endpoint, queryFilters]);
 
 	return (
 		<div className={`${classes['media-row']} ${classes[type]}`}>

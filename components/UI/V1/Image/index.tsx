@@ -31,7 +31,6 @@ const ImageComponent = ({
 			unoptimized,
 			layout,
 			src,
-			alt,
 			placeholder,
 		};
 
@@ -44,7 +43,7 @@ const ImageComponent = ({
 
 	return (
 		<div {...wrapperProps}>
-			<Image {...imageProps} />
+			<Image alt={alt} {...imageProps} />
 		</div>
 	);
 };
