@@ -2,16 +2,49 @@ import { useEffect, useState } from 'react';
 
 import classes from './styles.module.css';
 
+import { shuffleArray } from '@utils/v1/arrays';
 import { joinClassNames } from '@utils/v1/ClassName';
 
 import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
+type GenresUnits =
+	| 'Action'
+	| 'Adventure'
+	| 'Animation'
+	| 'Comedy'
+	| 'Crime'
+	| 'Documentary'
+	| 'Drama'
+	| 'Family'
+	| 'Fantasy'
+	| 'History'
+	| 'Horror'
+	| 'Music'
+	| 'Mystery'
+	| 'Romance'
+	| 'Science Fiction'
+	| 'TV Movie'
+	| 'Thriller'
+	| 'War'
+	| 'Western';
+
 interface MediaRowPropsInterface {
+	endpoint: string;
+	queryFilters: {
+		sort_by?: string;
+		primary_release_year?: number;
+		with_genres?: number;
+		genres?: GenresUnits[];
+		language?: string;
+		include_adult?: boolean;
+		include_video?: boolean;
+		page?: number;
+		with_watch_monetization_types?: string;
+	};
 	title: string;
 	type: string;
-	endpoint: string;
 }
 
 interface ThumbnailPropsInterface {
@@ -23,6 +56,10 @@ interface ThumbnailPropsInterface {
 interface ShowThumbnailsPropsInterface {
 	loadingData: boolean;
 	movies: JSX.Element[];
+}
+
+interface handleQueryFiltersInterface {
+	[key: string]: any;
 }
 
 const ShowThumbnails = ({
@@ -74,19 +111,40 @@ const Skeleton = () => {
 	);
 };
 
-const MediaRow = ({ endpoint, title, type }: MediaRowPropsInterface) => {
+const handleQueryFilters = <Type extends handleQueryFiltersInterface>(
+	filters: Type
+): string => {
+	const queryString = [];
+	let filter;
+
+	for (filter in filters) {
+		queryString.push(`${filter}=${filters.filter}`);
+	}
+
+	return queryString.length !== 0 ? `&${queryString.join('&')}` : '';
+};
+
+const MediaRow = ({
+	endpoint,
+	queryFilters,
+	title,
+	type,
+}: MediaRowPropsInterface) => {
 	const [loadingData, setLoadingData] = useState(true);
-	const [movies, setMoviesData] = useState([]);
+	const [movies, setMoviesData] = useState<any[]>([]);
 
 	// /discover/movie?with_genres=28&primary_release_year=2021
 	useEffect(() => {
 		fetch(
-			'https://api.themoviedb.org/3/discover/movie?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_watch_monetization_types=flatrate'
+			`https://api.themoviedb.org/3/${endpoint}?api_key=0987b940d511023f4a6e352711ab7d87${handleQueryFilters<
+				MediaRowPropsInterface['queryFilters']
+			>(queryFilters)}`
 		)
 			.then((response) => response.json())
 			.then((data) => {
 				// handle success
-				setMoviesData(data.results);
+				const shuffledResults = shuffleArray(data.results);
+				setMoviesData(shuffledResults);
 				setLoadingData(false);
 			})
 			.catch(function (error: Error) {
