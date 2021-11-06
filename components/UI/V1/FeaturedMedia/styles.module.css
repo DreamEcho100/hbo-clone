@@ -37,6 +37,7 @@
 	font-weight: 700;
 	color: white;
 	margin-bottom: 0.5em;
+	cursor: pointer;
 }
 
 .playing {
