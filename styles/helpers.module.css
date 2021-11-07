@@ -30,6 +30,10 @@
 	flex-direction: column;
 }
 
+.hideComp {
+  display: none;
+}
+
 /*
 .text-glow-special,
 a.text-glow-special,

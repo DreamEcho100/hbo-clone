@@ -1,35 +1,66 @@
+import { useRouter } from 'next/router';
+
 import { joinClassNames } from '@utils/v1/className';
 
 import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';
+import ImageComponent from '../Image';
 
-interface Props {
-	videoUrl: string;
+interface FeaturedMediaInterface {
 	title: string;
 	location: string;
 	mediaUrl: string;
+	linkUrl: string;
+	type?: 'front' | 'single';
 }
 
+interface ShowMediaInterface {
+	type?: FeaturedMediaInterface['type'];
+	mediaUrl: FeaturedMediaInterface['mediaUrl'];
+}
+
+const ShowMedia = ({ type, mediaUrl }: ShowMediaInterface) => {
+	if (type === 'front') {
+		return (
+			<iframe
+				className={classes.video}
+				width='100%'
+				height='100%'
+				src={mediaUrl}
+				allow='accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture'
+				allowFullScreen
+			/>
+		);
+	}
+
+	return <ImageComponent src={mediaUrl} className={classes['img-container']} />;
+};
+
 const FeaturedMedia = ({
-	videoUrl,
 	title,
 	location,
 	mediaUrl,
-}: Props): JSX.Element => {
+	linkUrl,
+	type,
+}: FeaturedMediaInterface): JSX.Element => {
+	const router = useRouter();
+
 	const clickedPlay = () => {
+		router.push(linkUrl);
 		console.log('send user to media page ' + mediaUrl);
 	};
 
 	return (
 		<section className={classes['featured-media']}>
-			<iframe
+			{/* <iframe
 				className={classes.video}
 				width='100%'
 				height='100%'
 				src={videoUrl} // 'https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
 				allow='accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture'
 				allowFullScreen
-			/>
+			/> */}
+			<ShowMedia type={type} mediaUrl={mediaUrl} />
 
 			<div className={joinClassNames(helpers.dFlex, classes.bg)}>
 				<div className={classes.container}>
@@ -39,10 +70,10 @@ const FeaturedMedia = ({
 							{/* Mortal Combat */}
 						</h1>
 					</div>
-					<div className={classes.playing}>
+					<div className={joinClassNames(type === 'single' ? helpers.hideComp : '', classes.playing)}>
 						<small>NOW PLAYING</small>
 					</div>
-					<div className={classes.location}>
+					<div className={joinClassNames(type === 'single' ? helpers.hideComp : '', classes.location)}>
 						<small>
 							{location}
 							{/* In theaters and on HBO MAX. Streaming throughout May 23. */}
@@ -61,6 +92,7 @@ const FeaturedMedia = ({
 						</button>
 						<button
 							className={joinClassNames(
+								type === 'single' ? helpers.hideComp : '',
 								helpers.dFlex,
 								helpers.xyCenter,
 								classes['info-btn']

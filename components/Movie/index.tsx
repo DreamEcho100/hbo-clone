@@ -8,10 +8,11 @@ const Movie = (): JSX.Element => {
 	return (
 		<MainLayout>
 			<FeaturedMedia
-				videoUrl='https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
+				mediaUrl='https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
 				title='Mortal Kombat'
 				location='In theaters and on HBO MAX. Streaming throughout May 23.'
-				mediaUrl='/movies/id'
+				// mediaUrl='/movies/id'
+				linkUrl=''
 			/>
 			<MediaRow
 				title='Movies'
@@ -24,7 +25,7 @@ const Movie = (): JSX.Element => {
 					primary_release_year: new Date().getFullYear(), // 2021,
 				}}
 			/>
-			<CastInfo />
+			<CastInfo mediaId={''} />
 		</MainLayout>
 	);
 };

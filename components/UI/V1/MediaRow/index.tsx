@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import classes from './styles.module.css';
 
@@ -51,6 +52,7 @@ interface MediaRowPropsInterface {
 
 interface ThumbnailPropsInterface {
 	movieData: {
+		id: string;
 		poster_path: string;
 	};
 	type: thumbnailType;
@@ -98,25 +100,29 @@ const Thumbnail /*: React.FunctionComponent<ThumbnailPropsInterface>*/ = ({
 		}[type]); // original
 
 	return (
-		<div className={classes.thumbnail}>
-			<Image
-				src={`https://image.tmdb.org/t/p/w${thumbSize(type)}${
-					movieData.poster_path
-				}`}
-				alt=''
-				className={classes['img-container']}
-				placeholder='blur'
-			/>
-			<div
-				className={joinClassNames(
-					helpers.dFlex,
-					helpers.xyCenter,
-					classes['top-layer']
-				)}
-			>
-				<i className='fas fa-play' />
-			</div>
-		</div>
+		<Link href={`/movie/${movieData.id}`}>
+			<a>
+				<div className={classes.thumbnail}>
+					<Image
+						src={`https://image.tmdb.org/t/p/w${thumbSize(type)}${
+							movieData.poster_path
+						}`}
+						alt=''
+						className={classes['img-container']}
+						placeholder='blur'
+					/>
+					<div
+						className={joinClassNames(
+							helpers.dFlex,
+							helpers.xyCenter,
+							classes['top-layer']
+						)}
+					>
+						<i className='fas fa-play' />
+					</div>
+				</div>
+			</a>
+		</Link>
 	);
 };
 
@@ -164,10 +170,9 @@ const MediaRow = ({
 				setMoviesData(shuffledResults);
 				setLoadingData(false);
 			})
-			.catch(function (error: Error) {
+			.catch((error: Error) => {
 				// handle error
-				console.error('Error Response For ' + title);
-				console.error(error);
+				console.error(`Error, ${error.message}`);
 			});
 	}, [title, endpoint, queryFilters]);
 

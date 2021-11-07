@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { useSharedHBOState } from '@store/HBOProvider';
 import {
 	toggleAccountModelDisplay,
@@ -42,7 +44,9 @@ const Header = (props: Props): JSX.Element => {
 					<i className='fas fa-search' />
 				</div>
 			</div>
-			<div className={classes.logo}></div>
+			<Link href='/'>
+				<a className={classes.logo}></a>
+			</Link>
 			<div
 				className={joinClassNames(
 					helpers.dFlex,
