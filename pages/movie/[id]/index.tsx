@@ -29,7 +29,6 @@ const SingleMediaPage = (props: SingleMediaPageInterface) => {
 		)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log('data', data);
 				setMediaData(data);
 			})
 			.catch((error: Error) => {
