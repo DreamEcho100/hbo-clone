@@ -1,11 +1,11 @@
 .cast-info {
-	padding: 5rem;
+	padding: 1em 3em;
 	color: white;
 }
 
 .group-title {
 	font-weight: 700;
-	margin: 1.5em 0;
+	margin: 0.5em 0;
 }
 
 .group-title:nth-child(1) {

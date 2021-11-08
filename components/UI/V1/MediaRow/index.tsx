@@ -38,7 +38,7 @@ interface MediaRowPropsInterface {
 	queryFilters: {
 		sort_by?: string;
 		primary_release_year?: number;
-		with_genres?: number;
+		with_genres?: string;
 		genres?: GenresUnits[];
 		language?: string;
 		include_adult?: boolean;
@@ -48,18 +48,22 @@ interface MediaRowPropsInterface {
 	};
 	title: string;
 	type: thumbnailType;
+	mediaType?: 'movie' | 'tv';
 }
 
 interface ThumbnailPropsInterface {
 	movieData: {
 		id: string;
 		poster_path: string;
+		title: string;
 	};
+	mediaType?: MediaRowPropsInterface['mediaType'];
 	type: thumbnailType;
 }
 
 interface ShowThumbnailsPropsInterface {
 	loadingData: boolean;
+	mediaType?: MediaRowPropsInterface['mediaType'];
 	movies: JSX.Element[];
 	type: thumbnailType;
 }
@@ -70,6 +74,7 @@ interface handleQueryFiltersInterface {
 
 const ShowThumbnails = ({
 	loadingData,
+	mediaType,
 	movies,
 	type,
 }: ShowThumbnailsPropsInterface): JSX.Element =>
@@ -82,13 +87,21 @@ const ShowThumbnails = ({
 	) : (
 		<>
 			{movies.map((movie: any, index) => {
-				return <Thumbnail key={index} movieData={movie} type={type} />;
+				return (
+					<Thumbnail
+						key={index}
+						movieData={movie}
+						type={type}
+						mediaType={mediaType}
+					/>
+				);
 			})}
 		</>
 	);
 
 const Thumbnail /*: React.FunctionComponent<ThumbnailPropsInterface>*/ = ({
 	movieData,
+	mediaType,
 	type,
 }: ThumbnailPropsInterface) => {
 	const thumbSize = (type: thumbnailType) =>
@@ -100,8 +113,11 @@ const Thumbnail /*: React.FunctionComponent<ThumbnailPropsInterface>*/ = ({
 		}[type]); // original
 
 	return (
-		<Link href={`/movie/${movieData.id}`}>
-			<a>
+		<Link
+			href={`/${mediaType === 'movie' ? 'movie' : 'tv'}/${movieData.id}`}
+			// href={`/movie/${movieData.id}`}
+		>
+			<a title={movieData.title}>
 				<div className={classes.thumbnail}>
 					<Image
 						src={`https://image.tmdb.org/t/p/w${thumbSize(type)}${
@@ -152,6 +168,7 @@ const MediaRow = ({
 	queryFilters,
 	title,
 	type,
+	mediaType = 'movie',
 }: MediaRowPropsInterface) => {
 	const [loadingData, setLoadingData] = useState(true);
 	const [movies, setMoviesData] = useState<any[]>([]);
@@ -180,7 +197,12 @@ const MediaRow = ({
 		<div className={`${classes['media-row']} ${classes[type]}`}>
 			<h3 className={classes.title}>{title}</h3>
 			<div className={joinClassNames(helpers.dFlex, classes.thumbnails)}>
-				<ShowThumbnails loadingData={loadingData} movies={movies} type={type} />
+				<ShowThumbnails
+					mediaType={mediaType}
+					loadingData={loadingData}
+					movies={movies}
+					type={type}
+				/>
 
 				{/* {loopComp(
             (<Thumbnail />), 10

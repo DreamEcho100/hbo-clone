@@ -25,7 +25,8 @@ const Header = (props: Props): JSX.Element => {
 			className={joinClassNames(
 				helpers.dFlex,
 				classes.header,
-				globalState.app.showAccountModal || globalState.app.showSideNav
+				globalState.app.settings.showAccountModal ||
+					globalState.app.settings.showSideNav
 					? classes['menu-open']
 					: ''
 			)}

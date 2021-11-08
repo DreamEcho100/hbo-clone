@@ -18,7 +18,7 @@ const Account = (props: Props): JSX.Element => {
 			className={joinClassNames(
 				helpers.dFlex,
 				classes.account,
-				globalState.app.showAccountModal ? classes.active : ''
+				globalState.app.settings.showAccountModal ? classes.active : ''
 			)}
 		>
 			<div className={classes.details}>

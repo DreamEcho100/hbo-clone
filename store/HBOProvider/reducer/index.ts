@@ -28,7 +28,10 @@ const reducer = (
 				...state,
 				app: {
 					...state.app,
-					showAccountModal: !state.app.showAccountModal,
+					settings: {
+						...state.app.settings,
+						showAccountModal: !state.app.settings.showAccountModal,
+					},
 				},
 			};
 		}
@@ -38,7 +41,10 @@ const reducer = (
 				...state,
 				app: {
 					...state.app,
-					showSideNav: !state.app.showSideNav,
+					settings: {
+						...state.app.settings,
+						showSideNav: !state.app.settings.showSideNav,
+					},
 				},
 			};
 		}
@@ -48,7 +54,10 @@ const reducer = (
 				...state,
 				app: {
 					...state.app,
-					showSearchModal: !state.app.showSearchModal,
+					settings: {
+						...state.app.settings,
+						showSearchModal: !state.app.settings.showSearchModal,
+					},
 				},
 			};
 		}

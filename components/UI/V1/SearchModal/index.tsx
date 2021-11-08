@@ -17,7 +17,7 @@ const SearchModal = (props: Props): JSX.Element => {
 		<section
 			className={joinClassNames(
 				classes['search-modal'],
-				globalState.app.showSearchModal ? classes.active : ''
+				globalState.app.settings.showSearchModal ? classes.active : ''
 			)}
 		>
 			<div

@@ -4,9 +4,14 @@ export interface UserInterface {
 }
 
 export interface AppInterface {
-	showAccountModal: boolean;
-	showSideNav: boolean;
-	showSearchModal: boolean;
+	defaults: {
+		thumbTypes: ['large-v', 'small-v', 'large-h', 'small-h'];
+	};
+	settings: {
+		showAccountModal: boolean;
+		showSideNav: boolean;
+		showSearchModal: boolean;
+	};
 }
 
 export interface InitialStateInterface {

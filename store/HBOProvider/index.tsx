@@ -9,9 +9,14 @@ export const initialState: InitialStateInterface = {
 		defaultImg: 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg',
 	},
 	app: {
-		showAccountModal: false,
-		showSideNav: false,
-		showSearchModal: false,
+		defaults: {
+			thumbTypes: ['large-v', 'small-v', 'large-h', 'small-h'],
+		},
+		settings: {
+			showAccountModal: false,
+			showSideNav: false,
+			showSearchModal: false,
+		},
 	},
 };
 

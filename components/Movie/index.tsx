@@ -8,11 +8,19 @@ const Movie = (): JSX.Element => {
 	return (
 		<MainLayout>
 			<FeaturedMedia
+				// mediaUrl='https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
+				// title='Mortal Kombat'
+				// location='In theaters and on HBO MAX. Streaming throughout May 23.'
+				// // mediaUrl='/movies/id'
+				// linkUrl=''
+
 				mediaUrl='https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
 				title='Mortal Kombat'
 				location='In theaters and on HBO MAX. Streaming throughout May 23.'
-				// mediaUrl='/movies/id'
-				linkUrl=''
+				linkUrl='/movie/460465'
+				type='front'
+				mediaType={'movie'}
+				mediaId={460465}
 			/>
 			<MediaRow
 				title='Movies'

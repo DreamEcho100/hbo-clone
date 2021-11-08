@@ -17,7 +17,7 @@ const SideNav = (props: Props): JSX.Element => {
 			className={joinClassNames(
 				helpers.dFlex,
 				classes['side-nav'],
-				globalState.app.showSideNav ? classes.active : ''
+				globalState.app.settings.showSideNav ? classes.active : ''
 			)}
 		>
 			<div

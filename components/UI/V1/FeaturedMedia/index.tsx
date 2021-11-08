@@ -8,10 +8,12 @@ import ImageComponent from '../Image';
 
 interface FeaturedMediaInterface {
 	title: string;
-	location: string;
+	location?: string;
 	mediaUrl: string;
 	linkUrl: string;
 	type?: 'front' | 'single';
+	mediaType?: 'series' | 'movie' | 'tv';
+	mediaId: string | number;
 }
 
 interface ShowMediaInterface {
@@ -42,12 +44,19 @@ const FeaturedMedia = ({
 	mediaUrl,
 	linkUrl,
 	type,
+	mediaType,
+	mediaId,
 }: FeaturedMediaInterface): JSX.Element => {
 	const router = useRouter();
 
 	const clickedPlay = () => {
+		// globalState.addToList({
+		// 	mediaId,
+		// 	mediaType,
+		// 	mediaUrl
+		// })
 		router.push(linkUrl);
-		console.log('send user to media page ' + mediaUrl);
+		console.log('Send user to media page ' + mediaUrl);
 	};
 
 	return (
@@ -70,10 +79,20 @@ const FeaturedMedia = ({
 							{/* Mortal Combat */}
 						</h1>
 					</div>
-					<div className={joinClassNames(type === 'single' ? helpers.hideComp : '', classes.playing)}>
+					<div
+						className={joinClassNames(
+							type === 'single' ? helpers.hideComp : '',
+							classes.playing
+						)}
+					>
 						<small>NOW PLAYING</small>
 					</div>
-					<div className={joinClassNames(type === 'single' ? helpers.hideComp : '', classes.location)}>
+					<div
+						className={joinClassNames(
+							type === 'single' ? helpers.hideComp : '',
+							classes.location
+						)}
+					>
 						<small>
 							{location}
 							{/* In theaters and on HBO MAX. Streaming throughout May 23. */}

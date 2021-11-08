@@ -6,20 +6,17 @@ import helpers from '@styles/helpers.module.css';
 
 interface CastInfoInterface {
 	mediaId: string;
+	mediaType?: 'movie' | 'tv';
 }
 
 interface ShowCastInterface {
 	loadingData: boolean;
-	credits: {
-		cast: any[];
-	};
+	cast: any[];
 }
 
 interface ShowCrewInterface {
 	loadingData: boolean;
-	credits: {
-		crew: any[];
-	};
+	crew: any[];
 }
 
 const crewListClasses = joinClassNames(
@@ -28,11 +25,11 @@ const crewListClasses = joinClassNames(
 	helpers.flexWrap
 );
 
-const ShowCast = ({ loadingData, credits }: ShowCastInterface) => {
+const ShowCast = ({ loadingData, cast }: ShowCastInterface) => {
 	if (loadingData !== true) {
 		return (
 			<>
-				{credits.cast.map((item, index) => {
+				{cast.map((item, index) => {
 					return (
 						<ul className={crewListClasses} key={index}>
 							<li>{item.character}</li>
@@ -47,11 +44,11 @@ const ShowCast = ({ loadingData, credits }: ShowCastInterface) => {
 	return <div>Loading Cast</div>;
 };
 
-const ShowCrew = ({ loadingData, credits }: ShowCrewInterface) => {
+const ShowCrew = ({ loadingData, crew }: ShowCrewInterface) => {
 	if (loadingData !== true) {
 		return (
 			<>
-				{credits.crew.map((item, index) => {
+				{crew.map((item, index) => {
 					return (
 						<ul className={crewListClasses} key={index}>
 							<li>{item.job}</li>
@@ -66,7 +63,7 @@ const ShowCrew = ({ loadingData, credits }: ShowCrewInterface) => {
 	return <div>Loading Crew</div>;
 };
 
-const CastInfo = ({ mediaId }: CastInfoInterface) => {
+const CastInfo = ({ mediaId, mediaType = 'movie' }: CastInfoInterface) => {
 	const [loadingData, setLoadingData] = useState(true);
 	const [credits, setCredits] = useState({
 		cast: [],
@@ -76,31 +73,37 @@ const CastInfo = ({ mediaId }: CastInfoInterface) => {
 	// /discover/movie?with_genres=28&primary_release_year=2021
 	useEffect(() => {
 		fetch(
-			`https://api.themoviedb.org/3/movie/${mediaId}/credits?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+			`https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
 		)
 			.then((response) => response.json())
 			.then((data) => {
-				setCredits(data);
-				setLoadingData(false);
-				// handle success
-				console.log('Success Response For cast and crew ');
+				if (data?.id) {
+					setCredits(data);
+					setLoadingData(false);
+					// handle success
+					console.log('Success Response For cast and crew ');
+				}
 			})
 			.catch((error: Error) => {
 				// handle error
 				console.error(`Error, ${error.message}`);
 			});
-	}, [mediaId]);
+	}, [mediaType, mediaId]);
 
 	return (
 		<section className={classes['cast-info']}>
-			<h4 className={classes['group-title']}>Cast</h4>
-			<div className={classes.list}>
+			{credits?.cast?.length !== 0 && (
 				<div className={classes.list}>
-					<ShowCast loadingData={loadingData} credits={credits} />
+					<h4 className={classes['group-title']}>Cast</h4>
+					<ShowCast loadingData={loadingData} cast={credits.cast} />
 				</div>
-				<h4 className={classes['group-title']}>Crew</h4>
-				<ShowCrew loadingData={loadingData} credits={credits} />
-			</div>
+			)}
+			{credits?.crew?.length !== 0 && (
+				<div className={classes.list}>
+					<h4 className={classes['group-title']}>Crew</h4>
+					<ShowCrew loadingData={loadingData} crew={credits.crew} />
+				</div>
+			)}
 		</section>
 	);
 };

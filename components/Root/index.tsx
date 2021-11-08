@@ -17,6 +17,8 @@ const Root = (props: Props): JSX.Element => {
 				location='In theaters and on HBO MAX. Streaming throughout May 23.'
 				linkUrl='/movie/460465'
 				type='front'
+				mediaType={'movie'}
+				mediaId={460465}
 			/>
 			{/* <MediaRow title='Movies' type='large-v' endpoint='api/movies/234' /> */}
 			<MediaRow
@@ -39,6 +41,8 @@ const Root = (props: Props): JSX.Element => {
 					include_video: true,
 					primary_release_year: new Date().getFullYear(), // 2021
 				}}
+				// mediaType='series'
+				mediaType='tv'
 			/>
 			<MediaRow
 				title='Action'
