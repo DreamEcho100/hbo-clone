@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useSharedHBOState } from '@store/HBOProvider';
 import { toggleSearchModalDisplay } from '@store/HBOProvider/actions';
 import { joinClassNames } from '@utils/v1/className';
@@ -6,12 +8,21 @@ import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
-import React from 'react';
 
 interface Props {}
 
 const SearchModal = (props: Props): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
+
+	useEffect(() => {
+		if (
+			globalState.app.settings.showAccountModal ||
+			globalState.app.settings.showSearchModal ||
+			globalState.app.settings.showSideNav
+		)
+			document.body.style.overflowY = 'hidden';
+		else document.body.style.overflowY = 'auto';
+	}, [globalState.app.settings]);
 
 	return (
 		<section

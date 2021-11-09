@@ -72,6 +72,8 @@ const CastInfo = ({ mediaId, mediaType = 'movie' }: CastInfoInterface) => {
 
 	// /discover/movie?with_genres=28&primary_release_year=2021
 	useEffect(() => {
+		setLoadingData(true);
+
 		fetch(
 			`https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
 		)
@@ -79,7 +81,6 @@ const CastInfo = ({ mediaId, mediaType = 'movie' }: CastInfoInterface) => {
 			.then((data) => {
 				if (data?.id) {
 					setCredits(data);
-					setLoadingData(false);
 					// handle success
 					console.log('Success Response For cast and crew ');
 				}
@@ -88,6 +89,8 @@ const CastInfo = ({ mediaId, mediaType = 'movie' }: CastInfoInterface) => {
 				// handle error
 				console.error(`Error, ${error.message}`);
 			});
+
+		setLoadingData(false);
 	}, [mediaType, mediaId]);
 
 	return (

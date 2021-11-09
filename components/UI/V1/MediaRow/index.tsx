@@ -175,6 +175,9 @@ const MediaRow = ({
 
 	// /discover/movie?with_genres=28&primary_release_year=2021
 	useEffect(() => {
+		// if (!loadingData)
+		setLoadingData(true);
+
 		fetch(
 			`https://api.themoviedb.org/3/${endpoint}?api_key=0987b940d511023f4a6e352711ab7d87${handleQueryFilters<
 				MediaRowPropsInterface['queryFilters']
@@ -185,12 +188,13 @@ const MediaRow = ({
 				// handle success
 				const shuffledResults = shuffleArray(data.results);
 				setMoviesData(shuffledResults);
-				setLoadingData(false);
 			})
 			.catch((error: Error) => {
 				// handle error
 				console.error(`Error, ${error.message}`);
 			});
+
+		setLoadingData(false);
 	}, [title, endpoint, queryFilters]);
 
 	return (
