@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { toggleSearchModalDisplay } from '@store/HBOProvider/actions';
@@ -9,20 +11,163 @@ import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
-interface Props {}
+type ClickedThumbnailType = /*<string, T2, T3>*/ (
+	type: string, // T1,
+	id: string, // T2,
+	media_type?: string // T3
+) => void;
 
-const SearchModal = (props: Props): JSX.Element => {
+interface SearchResultsInterface {
+	searchData: any[];
+	clickedThumbnail: ClickedThumbnailType;
+}
+interface PopularResultsInterface {
+	popData: any[];
+	clickedThumbnail: ClickedThumbnailType;
+}
+
+const PopularResults = ({
+	popData,
+	clickedThumbnail,
+}: PopularResultsInterface): JSX.Element => {
+	return (
+		<>
+			{popData.map((item, index) => {
+				return (
+					<div
+						key={index}
+						className={classes.thumbnail}
+						onClick={() => clickedThumbnail('popular', item.id)}
+					>
+						<Image
+							className={classes['img-container']}
+							src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+							alt=''
+						/>
+						<div
+							className={joinClassNames(
+								helpers.dFlex,
+								helpers.xyCenter,
+								classes['top-layer']
+							)}
+						>
+							<i className='fas fa-play' />
+						</div>
+					</div>
+				);
+			})}
+		</>
+	);
+};
+
+const SearchResults = ({
+	searchData,
+	clickedThumbnail,
+}: SearchResultsInterface): JSX.Element => {
+	return (
+		<>
+			{searchData.map((item, index) => {
+				return (
+					<div
+						key={index}
+						className={classes.thumbnail}
+						onClick={() =>
+							clickedThumbnail('popular', item.id, item.media_type)
+						}
+					>
+						<Image
+							className={classes['img-container']}
+							src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+							alt=''
+						/>
+						<div
+							className={joinClassNames(
+								helpers.dFlex,
+								helpers.xyCenter,
+								classes['top-layer']
+							)}
+						>
+							<i className='fas fa-play' />
+						</div>
+					</div>
+				);
+			})}
+		</>
+	);
+};
+
+const SearchModal = (): JSX.Element => {
+	const router = useRouter();
+
 	const [globalState, globalDispatch] = useSharedHBOState();
 
+	const [popData, setPopData] = useState([]);
+	const [searchData, setSearchData] = useState([]);
+	const [showResults, setShowResults] = useState(false);
+	const [inputValue, setInputValue] = useState('');
+
 	useEffect(() => {
-		if (
-			globalState.app.settings.showAccountModal ||
-			globalState.app.settings.showSearchModal ||
-			globalState.app.settings.showSideNav
-		)
-			document.body.style.overflowY = 'hidden';
-		else document.body.style.overflowY = 'auto';
-	}, [globalState.app.settings]);
+		const initData = async () => {
+			try {
+				const popData = await fetch(
+					`https://api.themoviedb.org/3/discover/movie?primary_release_year=2021&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+				)
+					.then((response) => response.json())
+					.then((data) => data.results.slice(0, 14));
+
+				console.log('popData', popData);
+				setPopData(popData);
+
+				setShowResults(false);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		initData();
+	}, []);
+
+	const handleInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
+		try {
+			setInputValue(event.target.value);
+			let searchData = await fetch(
+				`https://api.themoviedb.org/3/search/multi?query=${event.target.value}&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+			)
+				.then((response) => response.json())
+				.then((data) =>
+					data.results.filter(
+						(item: { media_type: string }) =>
+							item.media_type === 'tv' || item.media_type === 'movie'
+					)
+				);
+			setSearchData(searchData);
+			setShowResults(true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const clickedThumbnail: ClickedThumbnailType = (
+		type: string,
+		id: string,
+		media_type?: string
+	) => {
+		if (type === 'popular') {
+			router.push(`/movie/${id}`);
+			// globalState.setSearchOpenAction(!globalState.searchOpen);
+			toggleSearchModalDisplay({
+				dispatch: globalDispatch,
+			});
+		}
+
+		if (type === 'search') {
+			router.push(`/${media_type}/${id}`);
+			// globalState.setSearchOpenAction(!globalState.searchOpen);
+			toggleSearchModalDisplay({
+				dispatch: globalDispatch,
+			});
+		}
+	};
 
 	return (
 		<section
@@ -42,7 +187,8 @@ const SearchModal = (props: Props): JSX.Element => {
 					className={classes.input}
 					type='text'
 					placeholder='search for a title'
-					value=''
+					onChange={handleInput}
+					value={inputValue}
 				/>
 				<div
 					className={classes['close-btn']}
@@ -52,7 +198,11 @@ const SearchModal = (props: Props): JSX.Element => {
 				</div>
 			</div>
 
-			<h3 className={classes.title}>Popular Searches</h3>
+			<h3 className={classes.title}>
+				{showResults && searchData.length >= 1
+					? `Search Result for ${inputValue}`
+					: 'Popular Searches'}
+			</h3>
 
 			<div
 				className={joinClassNames(
@@ -61,7 +211,7 @@ const SearchModal = (props: Props): JSX.Element => {
 					classes.thumbnails
 				)}
 			>
-				{new Array(10).fill(null).map((item, index) => (
+				{/* {new Array(10).fill(null).map((item, index) => (
 					<div key={index} className={classes.thumbnail}>
 						<Image
 							className={classes['img-container']}
@@ -78,7 +228,18 @@ const SearchModal = (props: Props): JSX.Element => {
 							<i className='fas fa-play' />
 						</div>
 					</div>
-				))}
+				))} */}
+				{showResults && searchData.length >= 1 ? (
+					<SearchResults
+						searchData={searchData}
+						clickedThumbnail={clickedThumbnail}
+					/>
+				) : (
+					<PopularResults
+						popData={popData}
+						clickedThumbnail={clickedThumbnail}
+					/>
+				)}
 			</div>
 		</section>
 	);

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Link from 'next/link';
 
 import { useSharedHBOState } from '@store/HBOProvider';
@@ -13,16 +12,6 @@ interface Props {}
 
 const Account = (props: Props): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
-
-	useEffect(() => {
-		if (
-			globalState.app.settings.showAccountModal ||
-			globalState.app.settings.showSearchModal ||
-			globalState.app.settings.showSideNav
-		)
-			document.body.style.overflowY = 'hidden';
-		else document.body.style.overflowY = 'auto';
-	}, [globalState.app.settings]);
 
 	return (
 		<section

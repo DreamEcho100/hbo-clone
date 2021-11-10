@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+
+import { useSharedHBOState } from '@store/HBOProvider';
+
 import Header from '@components/UI/V1/Header';
 import SideNav from '@components/UI/V1/SideNav';
 
@@ -6,6 +10,18 @@ interface Props {
 }
 
 const MainLayout = ({ children }: Props): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+
+	useEffect(() => {
+		if (
+			globalState.app.settings.showAccountModal ||
+			globalState.app.settings.showSearchModal ||
+			globalState.app.settings.showSideNav
+		)
+			document.body.style.overflowY = 'hidden';
+		else document.body.style.overflowY = 'auto';
+	}, [globalState.app.settings]);
+
 	return (
 		<div
 			style={{
