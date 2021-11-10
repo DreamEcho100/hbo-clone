@@ -49,7 +49,7 @@ const ShowRandomMedia = ({ genresData, query }: ShowRandomMediaInterface) => {
 							queryFilters={{
 								with_genres: query.genre_id,
 								sort_by: 'popularity.desc',
-								primary_release_year: 2021,
+								primary_release_year: new Date().getFullYear(),
 								page: index + 1,
 							}}
 						/>
@@ -94,7 +94,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			`https://api.themoviedb.org/3/genre/${context.query.mediaType}/list?api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`
 		).then((response) => response.json());
 		featuredData = await fetch(
-			`https://api.themoviedb.org/3/discover/${context.query.mediaType}?primary_release_year=2021&with_genres=${context.query.genre_id}&api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`
+			`https://api.themoviedb.org/3/discover/${
+				context.query.mediaType
+			}?primary_release_year=${new Date().getFullYear()}&with_genres=${
+				context.query.genre_id
+			}&api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`
 		).then((response) => response.json());
 	} catch (error) {
 		console.error(`Error, ${error}`);

@@ -11,10 +11,10 @@ import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
-type ClickedThumbnailType = /*<string, T2, T3>*/ (
-	type: string, // T1,
-	id: string, // T2,
-	media_type?: string // T3
+type ClickedThumbnailType = (
+	type: string,
+	id: string,
+	media_type?: string
 ) => void;
 
 interface SearchResultsInterface {
@@ -38,6 +38,7 @@ const PopularResults = ({
 						key={index}
 						className={classes.thumbnail}
 						onClick={() => clickedThumbnail('popular', item.id)}
+						title={item.title || item.original_title || ''}
 					>
 						<Image
 							className={classes['img-container']}
@@ -71,9 +72,8 @@ const SearchResults = ({
 					<div
 						key={index}
 						className={classes.thumbnail}
-						onClick={() =>
-							clickedThumbnail('popular', item.id, item.media_type)
-						}
+						onClick={() => clickedThumbnail('search', item.id, item.media_type)}
+						title={item.title || item.original_title || ''}
 					>
 						<Image
 							className={classes['img-container']}
@@ -110,12 +110,11 @@ const SearchModal = (): JSX.Element => {
 		const initData = async () => {
 			try {
 				const popData = await fetch(
-					`https://api.themoviedb.org/3/discover/movie?primary_release_year=2021&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+					`https://api.themoviedb.org/3/discover/movie?primary_release_year=${new Date().getFullYear()}&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
 				)
 					.then((response) => response.json())
-					.then((data) => data.results.slice(0, 14));
+					.then((data) => data.results);
 
-				console.log('popData', popData);
 				setPopData(popData);
 
 				setShowResults(false);
@@ -154,7 +153,6 @@ const SearchModal = (): JSX.Element => {
 	) => {
 		if (type === 'popular') {
 			router.push(`/movie/${id}`);
-			// globalState.setSearchOpenAction(!globalState.searchOpen);
 			toggleSearchModalDisplay({
 				dispatch: globalDispatch,
 			});
@@ -162,7 +160,6 @@ const SearchModal = (): JSX.Element => {
 
 		if (type === 'search') {
 			router.push(`/${media_type}/${id}`);
-			// globalState.setSearchOpenAction(!globalState.searchOpen);
 			toggleSearchModalDisplay({
 				dispatch: globalDispatch,
 			});
@@ -211,24 +208,6 @@ const SearchModal = (): JSX.Element => {
 					classes.thumbnails
 				)}
 			>
-				{/* {new Array(10).fill(null).map((item, index) => (
-					<div key={index} className={classes.thumbnail}>
-						<Image
-							className={classes['img-container']}
-							src='https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/88997/93196/Avengers-Endgame-Final-Style-Poster-buy-original-movie-posters-at-starstills__42370.1563973516.jpg?c=2?imbypass=on'
-							alt=''
-						/>
-						<div
-							className={joinClassNames(
-								helpers.dFlex,
-								helpers.xyCenter,
-								classes['top-layer']
-							)}
-						>
-							<i className='fas fa-play' />
-						</div>
-					</div>
-				))} */}
 				{showResults && searchData.length >= 1 ? (
 					<SearchResults
 						searchData={searchData}

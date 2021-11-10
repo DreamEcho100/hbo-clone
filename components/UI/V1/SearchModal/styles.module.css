@@ -27,6 +27,7 @@
 }
 
 .input {
+	color: white;
 	background: transparent;
 	font-size: var(--size-20);
 	border: none;
