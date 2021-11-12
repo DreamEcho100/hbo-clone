@@ -18,7 +18,7 @@ interface MediaTypePageInterface {
 		results: string;
 	};
 	query: {
-		mediaType: string;
+		mediaType: 'tv' | 'movie';
 		genre_id: string;
 	};
 }
@@ -46,6 +46,7 @@ const ShowRandomMedia = ({ genresData, query }: ShowRandomMediaInterface) => {
 							title={item.name}
 							type={thumbType}
 							endpoint={`discover/${query.mediaType}`}
+							mediaType={query.mediaType}
 							queryFilters={{
 								with_genres: query.genre_id,
 								sort_by: 'popularity.desc',
@@ -79,7 +80,12 @@ const MediaTypePage = ({
 			/>
 			<GenreNav mediaType={query.mediaType} genresData={genresData} />
 
-			<ShowRandomMedia genresData={genresData} query={query} />
+			<ShowRandomMedia
+				genresData={genresData.filter(
+					(item) => item.id === parseInt(query.genre_id)
+				)}
+				query={query}
+			/>
 		</MainLayout>
 	);
 };
@@ -91,18 +97,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	let featuredData;
 	try {
 		genresData = await fetch(
-			`https://api.themoviedb.org/3/genre/${context.query.mediaType}/list?api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`
+			`https://api.themoviedb.org/3/genre/${context.query.mediaType}/list?api_key=${process.env.TMDB_API_KEY}&language=en-US`
 		).then((response) => response.json());
 		featuredData = await fetch(
 			`https://api.themoviedb.org/3/discover/${
 				context.query.mediaType
 			}?primary_release_year=${new Date().getFullYear()}&with_genres=${
 				context.query.genre_id
-			}&api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`
+			}&api_key=${process.env.TMDB_API_KEY}&language=en-US`
 		).then((response) => response.json());
 	} catch (error) {
-		console.error(`Error, ${error}`);
+		if (error instanceof Error) console.error(`Error, ${error.message}`);
 	}
+
 	return {
 		props: {
 			genresData: genresData.genres,

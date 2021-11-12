@@ -75,7 +75,7 @@ const CastInfo = ({ mediaId, mediaType = 'movie' }: CastInfoInterface) => {
 		setLoadingData(true);
 
 		fetch(
-			`https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+			`https://api.themoviedb.org/3/${mediaType}/${mediaId}/credits?api_key=${process.env.TMDB_API_KEY}&language=en-US`
 		)
 			.then((response) => response.json())
 			.then((data) => {

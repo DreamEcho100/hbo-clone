@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 
+import { useSharedHBOState } from '@store/HBOProvider';
+import { addItemToWatchList } from '@store/HBOProvider/actions';
 import { joinClassNames } from '@utils/v1/className';
 
 import classes from './styles.module.css';
@@ -12,7 +14,7 @@ interface FeaturedMediaInterface {
 	mediaUrl: string;
 	linkUrl: string;
 	type?: 'front' | 'single';
-	mediaType?: 'series' | 'movie' | 'tv';
+	mediaType?: 'movie' | 'tv';
 	mediaId: string | number;
 }
 
@@ -49,14 +51,28 @@ const FeaturedMedia = ({
 }: FeaturedMediaInterface): JSX.Element => {
 	const router = useRouter();
 
+	const [globalState, globalDispatch] = useSharedHBOState();
+
 	const clickedPlay = () => {
-		// globalState.addToList({
+		// globalState.addItemToWatchList({
 		// 	mediaId,
 		// 	mediaType,
 		// 	mediaUrl
 		// })
 		router.push(linkUrl);
 		console.log('Send user to media page ' + mediaUrl);
+	};
+
+	const clickedAdd = () => {
+		addItemToWatchList({
+			dispatch: globalDispatch,
+			item: {
+				mediaId: mediaId,
+				mediaType: mediaType,
+				mediaUrl: mediaUrl,
+			},
+		});
+		console.log('Clicked TO ADD MOVIE');
 	};
 
 	return (
@@ -108,6 +124,14 @@ const FeaturedMedia = ({
 							onClick={clickedPlay}
 						>
 							<i className='fas fa-play' />
+						</button>
+						<button
+							className={`${classes['add-btn']} ${
+								type !== 'single' ? 'hideComp' : ''
+							}`}
+							onClick={() => clickedAdd()}
+						>
+							<i className='fas fa-plus' />
 						</button>
 						<button
 							className={joinClassNames(

@@ -10,6 +10,9 @@ module.exports = (phase) => {
 			// your project has ESLint errors.
 			ignoreDuringBuilds: true,
 		},
+		env: {
+			TMDB_API_KEY: process.env.TMDB_API_KEY,
+		},
 	};
 
 	if (phase === PHASE_DEVELOPMENT_SERVER) {

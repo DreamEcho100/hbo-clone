@@ -1,7 +1,9 @@
 import { initialState } from '@store/HBOProvider';
 import { InitialStateInterface } from '../ts/interfaces';
 import {
-	ADD_USER,
+	ADD_ITEM_TO_WATCH_LIST,
+	SET_USER,
+	REMOVE_ITEM_FROM_WATCH_LIST,
 	REMOVE_USER,
 	TOGGLE_ACCOUNT_MODEL_DISPLAY,
 	TOGGLE_SEARCH_MODAL,
@@ -14,7 +16,7 @@ const reducer = (
 	action: ACTION_TYPE
 ): InitialStateInterface => {
 	switch (action.type) {
-		case ADD_USER: {
+		case SET_USER: {
 			const { user } = action.payload;
 			return { ...state, user: { ...state.user, ...user } };
 		}
@@ -58,6 +60,32 @@ const reducer = (
 						...state.app.settings,
 						showSearchModal: !state.app.settings.showSearchModal,
 					},
+				},
+			};
+		}
+
+		case ADD_ITEM_TO_WATCH_LIST: {
+			const { item } = action.payload;
+
+			return {
+				...state,
+				user: {
+					...state.user,
+					watchList: [...state.user.watchList, item],
+				},
+			};
+		}
+
+		case REMOVE_ITEM_FROM_WATCH_LIST: {
+			const { mediaId } = action.payload;
+
+			return {
+				...state,
+				user: {
+					...state.user,
+					watchList: state.user.watchList.filter(
+						(item) => item.mediaId !== mediaId
+					),
 				},
 			};
 		}

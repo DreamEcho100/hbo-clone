@@ -1,8 +1,6 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { v4 } from 'uuid';
-
-import ls from '@utils/v1/localStorage';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { createUser } from '@store/HBOProvider/actions';
@@ -13,45 +11,51 @@ import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
 
-const CreateUser = (): JSX.Element => {
+const CreateUserComponent = (): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
+
 	const router = useRouter();
 
+	type nameType = typeof globalState.user.name;
+	type mainBackgroundType = typeof globalState.user.mainBackground;
+
+	const userDataDefault: {
+		name: nameType;
+		mainBackground: mainBackgroundType;
+	} = {
+		name: '',
+		mainBackground: globalState.app.defaults.mainBackgrounds[0],
+	};
+	const [userData, setUserData] = useState(userDataDefault);
+
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		createUser({
-			dispatch: globalDispatch,
-			user: {
-				name: event.target.value,
-				defaultImg: '',
-			},
-		});
+		setUserData((prev) => ({
+			...prev,
+			name: event.target.value,
+			// mainBackground: mainBackground
+		}));
+	};
+
+	const handleSettingMainBackground = (item: mainBackgroundType) => {
+		setUserData((prev) => ({
+			...prev,
+			mainBackground: item,
+		}));
 	};
 
 	const saveUser = (event: React.SyntheticEvent) => {
 		event.preventDefault;
 
-		let users: any[] = ls.check('users') ? ls.get('users') : [],
-			user;
+		createUser({
+			userData: {
+				id: v4(),
+				defaultImg: '',
+				watchList: [],
+				...userData,
+			},
+		});
 
-		if (users.length < 1) {
-			user = {
-				id: v4(),
-				name: globalState.user.name,
-				myListID: [],
-			};
-			users.push(user);
-			ls.set('users', users);
-			router.push('/login');
-		} else {
-			user = {
-				id: v4(),
-				name: globalState.user.name,
-				myListID: [],
-			};
-			users.push(user);
-			ls.set('users', users);
-			router.push('/login');
-		}
+		router.push('/login');
 	};
 
 	return (
@@ -61,6 +65,15 @@ const CreateUser = (): JSX.Element => {
 				helpers.flexColumn,
 				classes['create-user']
 			)}
+			style={{
+				background: globalState.user.mainBackground
+					? globalState.user.mainBackground
+					: globalState.app.defaults.mainBackgrounds[
+							Math.floor(
+								Math.random() * globalState.app.defaults.mainBackgrounds.length
+							)
+					  ],
+			}}
 		>
 			<header
 				className={joinClassNames(
@@ -105,52 +118,25 @@ const CreateUser = (): JSX.Element => {
 							name='user-name'
 							id='user-name-input-text'
 							className={classes['user-name']}
-							value={globalState.user.name}
+							value={userData.name}
 							onChange={handleChange}
 						/>
 						<label htmlFor='user-name-input-text'>Name</label>
 					</div>
 					<div className={joinClassNames(helpers.dFlex, classes.colors)}>
-						<div
-							className={`${classes.color} ${classes.active}`}
-							style={{
-								backgroundColor: 'rgb(2,27,64)',
-								background:
-									'linear-gradient(135deg, rgba(2,27,64,1) 11%, rgba(119,30,135,1) 100%)',
-							}}
-						/>
-						<div
-							className={`${classes.color}`}
-							style={{
-								backgroundColor: 'rgb(2,27,64)',
-								background:
-									'linear-gradient(135deg, rgba(2,27,64,1) 11%, rgba(238,255,18,1) 100%)',
-							}}
-						/>
-						<div
-							className={`${classes.color}`}
-							style={{
-								backgroundColor: 'rgb(2,27,64)',
-								background:
-									'linear-gradient(135deg, rgba(2,27,64,1) 11%, rgba(135,30,66,1) 100%)',
-							}}
-						/>
-						<div
-							className={`${classes.color}`}
-							style={{
-								backgroundColor: 'rgb(2,27,64)',
-								background:
-									'linear-gradient(135deg, rgba(2,27,64,1) 11%, rgba(18,51,255,1) 100%)',
-							}}
-						/>
-						<div
-							className={`${classes.color}`}
-							style={{
-								backgroundColor: 'rgb(2,27,64)',
-								background:
-									'linear-gradient(135deg, rgba(2,27,64,1) 11%, rgba(30,129,135,1) 100%)',
-							}}
-						/>
+						{globalState.app.defaults.mainBackgrounds.map((item: string) => (
+							<div
+								className={`${classes.color} ${
+									userData.mainBackground === item ? classes.active : ''
+								}`}
+								style={{
+									backgroundColor: 'rgb(2,27,64)',
+									background: item,
+								}}
+								key={item}
+								onClick={() => handleSettingMainBackground(item)}
+							/>
+						))}
 					</div>
 				</div>
 			</form>
@@ -163,7 +149,12 @@ const CreateUser = (): JSX.Element => {
 					classes.buttons
 				)}
 			>
-				<button className={classes.cancel}>Cancel</button>
+				<button
+					className={classes.cancel}
+					onClick={() => router.push('/login')}
+				>
+					Cancel
+				</button>
 				<button className={classes.save} onClick={saveUser}>
 					Save
 				</button>
@@ -172,4 +163,4 @@ const CreateUser = (): JSX.Element => {
 	);
 };
 
-export default CreateUser;
+export default CreateUserComponent;

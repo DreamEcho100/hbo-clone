@@ -15,7 +15,7 @@ interface SingleMediaPageInterface {
 	};
 	query: {
 		id: string;
-		mediaType: 'movie' | 'tv' ;
+		mediaType: 'movie' | 'tv';
 	};
 }
 
@@ -25,7 +25,7 @@ const SingleMediaPage = ({ mediaData, query }: SingleMediaPageInterface) => {
 			<FeaturedMedia
 				// title={mediaData.title}
 				// mediaUrl={`https://image.tmdb.org/t/p/w1280${mediaData.backdrop_path}`}
-				location='In theaters and on HBO MAX. Streaming throughout May 23.'
+				// location='In theaters and on HBO MAX. Streaming throughout May 23.'
 				linkUrl={`/movie/${mediaData.id}`} // '/movies/id' // imdb_id
 				type='single'
 				title={query.mediaType === 'movie' ? mediaData.title : mediaData.name}
@@ -57,10 +57,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	try {
 		mediaData = await fetch(
-			`https://api.themoviedb.org/3/${context.query.mediaType}/${context.query.id}?api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+			`https://api.themoviedb.org/3/${context.query.mediaType}/${context.query.id}?api_key=${process.env.TMDB_API_KEY}&language=en-US`
 		).then((response) => response.json());
 	} catch (error) {
-		console.error(`Error, ${error}`);
+		if (error instanceof Error) console.error(`Error, ${error.message}`);
 	}
 
 	return {

@@ -1,12 +1,12 @@
 .create-user {
 	color: white;
 	background: rgb(26, 39, 103);
-	background: linear-gradient(
+	/* background: linear-gradient(
 		312deg,
 		rgba(26, 39, 103, 1) 0%,
 		rgba(48, 20, 94, 1) 45%,
 		rgba(0, 0, 0, 1) 100%
-	);
+	); */
 	min-height: 100vh;
 	padding: 1em;
 	justify-content: space-between;

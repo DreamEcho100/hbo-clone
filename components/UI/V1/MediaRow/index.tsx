@@ -157,7 +157,7 @@ const handleQueryFilters = <Type extends handleQueryFiltersInterface>(
 	let filter;
 
 	for (filter in filters) {
-		queryString.push(`${filter}=${filters.filter}`);
+		queryString.push(`${filter}=${filters[filter]}`);
 	}
 
 	return queryString.length !== 0 ? `&${queryString.join('&')}` : '';
@@ -179,9 +179,11 @@ const MediaRow = ({
 		setLoadingData(true);
 
 		fetch(
-			`https://api.themoviedb.org/3/${endpoint}?api_key=0987b940d511023f4a6e352711ab7d87${handleQueryFilters<
-				MediaRowPropsInterface['queryFilters']
-			>(queryFilters)}`
+			`https://api.themoviedb.org/3/${endpoint}?api_key=${
+				process.env.TMDB_API_KEY
+			}${handleQueryFilters<MediaRowPropsInterface['queryFilters']>(
+				queryFilters
+			)}`
 		)
 			.then((response) => response.json())
 			.then((data) => {

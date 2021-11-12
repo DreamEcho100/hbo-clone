@@ -110,7 +110,9 @@ const SearchModal = (): JSX.Element => {
 		const initData = async () => {
 			try {
 				const popData = await fetch(
-					`https://api.themoviedb.org/3/discover/movie?primary_release_year=${new Date().getFullYear()}&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+					`https://api.themoviedb.org/3/discover/movie?primary_release_year=${new Date().getFullYear()}&api_key=${
+						process.env.TMDB_API_KEY
+					}&language=en-US`
 				)
 					.then((response) => response.json())
 					.then((data) => data.results);
@@ -119,7 +121,7 @@ const SearchModal = (): JSX.Element => {
 
 				setShowResults(false);
 			} catch (error) {
-				console.log(error);
+				if (error instanceof Error) console.error(`Error, ${error.message}`);
 			}
 		};
 
@@ -130,7 +132,7 @@ const SearchModal = (): JSX.Element => {
 		try {
 			setInputValue(event.target.value);
 			let searchData = await fetch(
-				`https://api.themoviedb.org/3/search/multi?query=${event.target.value}&api_key=0987b940d511023f4a6e352711ab7d87&language=en-US`
+				`https://api.themoviedb.org/3/search/multi?query=${event.target.value}&api_key=${process.env.TMDB_API_KEY}&language=en-US`
 			)
 				.then((response) => response.json())
 				.then((data) =>
@@ -142,7 +144,7 @@ const SearchModal = (): JSX.Element => {
 			setSearchData(searchData);
 			setShowResults(true);
 		} catch (error) {
-			console.log(error);
+			if (error instanceof Error) console.error(`Error, ${error.message}`);
 		}
 	};
 

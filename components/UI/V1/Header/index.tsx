@@ -58,10 +58,13 @@ const Header = (props: Props): JSX.Element => {
 			>
 				<Image
 					className={classes['user-img']}
-					src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+					src={
+						globalState.user.defaultImg ||
+						'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+					}
 					alt=''
 				/>
-				<div className={classes['user-name']}>Bryant</div>
+				<div className={classes['user-name']}>{globalState.user.name}</div>
 			</div>
 			<Account />
 			<SearchModal />

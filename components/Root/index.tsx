@@ -17,7 +17,7 @@ const Root = (props: Props): JSX.Element => {
 				location='In theaters and on HBO MAX. Streaming throughout May 23.'
 				linkUrl='/movie/460465'
 				type='front'
-				mediaType={'movie'}
+				mediaType='movie'
 				mediaId={460465}
 			/>
 			{/* <MediaRow title='Movies' type='large-v' endpoint='api/movies/234' /> */}

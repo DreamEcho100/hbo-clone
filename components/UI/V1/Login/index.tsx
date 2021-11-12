@@ -11,6 +11,7 @@ import helpers from '@styles/helpers.module.css';
 import { joinClassNames } from '@utils/v1/className';
 
 import Image from '@components/UI/V1/Image';
+import { setUser } from '@store/HBOProvider/actions';
 
 interface ShowUsersPropsInterface {
 	users: any[];
@@ -60,11 +61,16 @@ const Login = (props: LoginPropsInterface): JSX.Element => {
 
 	const selectUser = (id: string) => {
 		ls.set('activeUID', id);
+
+		setUser({
+			dispatch: globalDispatch,
+			// activeUID: id,
+		});
 		router.push('/');
 	};
 
 	const createUser = () => {
-		router.push('/');
+		router.push('/create');
 	};
 
 	useEffect(() => {
@@ -80,6 +86,15 @@ const Login = (props: LoginPropsInterface): JSX.Element => {
 				helpers.flexColumn,
 				classes['login-user']
 			)}
+			style={{
+				background: globalState.user.mainBackground
+					? globalState.user.mainBackground
+					: globalState.app.defaults.mainBackgrounds[
+							Math.floor(
+								Math.random() * globalState.app.defaults.mainBackgrounds.length
+							)
+					  ],
+			}}
 		>
 			<header
 				className={joinClassNames(
@@ -100,8 +115,14 @@ const Login = (props: LoginPropsInterface): JSX.Element => {
 			</section>
 
 			<footer className={classes.buttons}>
-				<button className={classes.adult}>Add Adult</button>
-				<button className={classes.kid} onClick={createUser}>
+				{/* <button className={classes.adult}>Add Adult</button> */}
+				<button
+					className={
+						// classes.kid
+						classes.createUser
+					}
+					onClick={createUser}
+				>
 					Create User
 				</button>
 			</footer>
