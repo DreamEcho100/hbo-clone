@@ -12,7 +12,7 @@
     "next": "^12.0.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-tracked": "^1.7.4",
+    "react-tracked": "https://pkg.csb.dev/dai-shi/react-tracked/commit/49f9418d/react-tracked",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

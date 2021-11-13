@@ -124,7 +124,7 @@ const CreateUserComponent = (): JSX.Element => {
 						<label htmlFor='user-name-input-text'>Name</label>
 					</div>
 					<div className={joinClassNames(helpers.dFlex, classes.colors)}>
-						{globalState.app.defaults.mainBackgrounds.map((item: string) => (
+						{globalState.app.defaults.mainBackgrounds.map((item: mainBackgroundType) => (
 							<div
 								className={`${classes.color} ${
 									userData.mainBackground === item ? classes.active : ''
