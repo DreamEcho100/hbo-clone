@@ -59,6 +59,8 @@
 }
 
 .top-layer :global(.fa-play) {
+	margin: auto;
+	width: fit-content;
 	color: white;
 	font-size: 7rem;
 	transform: translate3d(0, 10rem, 0);

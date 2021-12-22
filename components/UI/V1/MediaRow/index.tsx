@@ -202,18 +202,19 @@ const MediaRow = ({
 	return (
 		<div className={`${classes['media-row']} ${classes[type]}`}>
 			<h3 className={classes.title}>{title}</h3>
-			<div className={joinClassNames(helpers.dFlex, classes.thumbnails)}>
+			<div
+				className={joinClassNames(
+					helpers.dFlex,
+					helpers.xyCenter,
+					classes.thumbnails
+				)}
+			>
 				<ShowThumbnails
 					mediaType={mediaType}
 					loadingData={loadingData}
 					movies={movies}
 					type={type}
 				/>
-
-				{/* {loopComp(
-            (<Thumbnail />), 10
-            
-            )} */}
 			</div>
 		</div>
 	);

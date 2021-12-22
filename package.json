@@ -9,18 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "^12.0.3",
+    "next": "^12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-tracked": "https://pkg.csb.dev/dai-shi/react-tracked/commit/49f9418d/react-tracked",
+    "react-tracked": "^1.7.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/node": "16.11.6",
-    "@types/react": "17.0.33",
-    "@types/uuid": "^8.3.1",
-    "eslint": "7.32.0",
-    "eslint-config-next": "12.0.1",
-    "typescript": "4.4.4"
+    "@types/node": "^17.0.2",
+    "@types/react": "^17.0.37",
+    "@types/uuid": "^8.3.3",
+    "eslint": "^8.4.1",
+    "eslint-config-next": "^12.0.7",
+    "typescript": "^4.5.4"
   }
 }
