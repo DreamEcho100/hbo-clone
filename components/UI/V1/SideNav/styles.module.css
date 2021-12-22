@@ -25,16 +25,30 @@
 	transition: opacity 0.4s ease-in-out;
 }
 
+.MediaTypeForGenres button,
 .side-nav li a {
 	color: rgb(80, 80, 80);
+}
+
+.MediaTypeForGenres,
+.side-nav li a {
 	font-size: var(--size-8);
 	text-decoration: none;
 	display: block;
 	margin-bottom: 1em;
 	transition: color 0.2s ease-in-out;
 }
+.side-nav li a {
+	color: rgb(80, 80, 80);
+}
+
+.MediaTypeForGenres header,
+.MediaTypeForGenres button.active,
+.MediaTypeForGenres button:hover,
+.MediaTypeForGenres button:focus,
 .side-nav li a.active,
-.side-nav li a:hover {
+.side-nav li a:hover,
+.side-nav li a:focus {
 	font-weight: 500;
 	color: white;
 }

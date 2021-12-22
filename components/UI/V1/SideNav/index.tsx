@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { useSharedHBOState } from '@store/HBOProvider';
 import { toggleSideNavDisplay } from '@store/HBOProvider/actions';
@@ -8,9 +9,53 @@ import classes from './styles.module.css';
 import helpers from '@styles/helpers.module.css';
 
 interface Props {}
-
 const SideNav = (props: Props): JSX.Element => {
 	const [globalState, globalDispatch] = useSharedHBOState();
+	const [selectedMediaType, setSelectedMediaType] = useState<'movie' | 'tv'>(
+		'movie'
+	);
+
+	const genres = {
+		movie: [
+			{ id: '28', title: 'Action' },
+			{ id: '12', title: 'Adventure' },
+			{ id: '16', title: 'Animation' },
+			{ id: '35', title: 'Comedy' },
+			{ id: '80', title: 'Crime' },
+			{ id: '99', title: 'Documentary' },
+			{ id: '18', title: 'Drama' },
+			{ id: '10751', title: 'Family' },
+			{ id: '14', title: 'Fantasy' },
+			{ id: '36', title: 'History' },
+			{ id: '27', title: 'Horror' },
+			{ id: '10402', title: 'Music' },
+			{ id: '9648', title: 'Mystery' },
+			{ id: '10749', title: 'Romance' },
+			{ id: '878', title: 'Science Fiction' },
+			{ id: '10770', title: 'TV Movie' },
+			{ id: '53', title: 'Thriller' },
+			{ id: '10752', title: 'War' },
+			{ id: '37', title: 'Western' },
+		],
+		tv: [
+			{ id: '10759', title: 'Action, Adventure' },
+			{ id: '16', title: 'Animation' },
+			{ id: '35', title: 'Comedy' },
+			{ id: '80', title: 'Crime' },
+			{ id: '99', title: 'Documentary' },
+			{ id: '18', title: 'Drama' },
+			{ id: '10751', title: 'Family' },
+			{ id: '10762', title: 'Kids' },
+			{ id: '9648', title: 'Mystery' },
+			{ id: '10763', title: 'News' },
+			{ id: '10764', title: 'Reality' },
+			{ id: '10765', title: 'Sci-Fi, Fantasy' },
+			{ id: '10766', title: 'Soap' },
+			{ id: '10767', title: 'Talk' },
+			{ id: '10768', title: 'War, Politics' },
+			{ id: '37', title: 'Western' },
+		],
+	};
 
 	return (
 		<aside
@@ -37,16 +82,16 @@ const SideNav = (props: Props): JSX.Element => {
 					</Link>
 				</li>
 				<li>
-					<Link href='/'>
-						<a>Series</a>
+					<Link href='/tv'>
+						<a>TV</a>
 					</Link>
 				</li>
 				<li>
-					<Link href='/'>
+					<Link href='/movie'>
 						<a>Movies</a>
 					</Link>
 				</li>
-				<li>
+				{/* <li>
 					<Link href='/'>
 						<a>Originals</a>
 					</Link>
@@ -70,100 +115,35 @@ const SideNav = (props: Props): JSX.Element => {
 					<Link href='/'>
 						<a>Trending Now</a>
 					</Link>
-				</li>
+				</li> */}
 			</ul>
 			<div className={classes.divider} />
 			<ul className={classes.main}>
-				<li>
-					<Link href='/'>
-						<a>Action</a>
-					</Link>
+				<li className={classes.MediaTypeForGenres}>
+					<header>
+						<p>Media Type For Genres</p>
+					</header>
+					<button
+						className={selectedMediaType === 'movie' ? classes.active : ''}
+						onClick={() => setSelectedMediaType('movie')}
+					>
+						Movie
+					</button>
+					<span>|</span>
+					<button
+						className={selectedMediaType === 'tv' ? classes.active : ''}
+						onClick={() => setSelectedMediaType('tv')}
+					>
+						TV
+					</button>
 				</li>
-				<li>
-					<Link href='/'>
-						<a>Animation</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Comedy</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Crime</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Documentaries</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Drama</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Fantasy & Sci-fi</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Horror</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>International</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Kids & Family</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Latino</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Music</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>News/Talk</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Reality</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Romance</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Shorts</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Sports</a>
-					</Link>
-				</li>
-				<li>
-					<Link href='/'>
-						<a>Suspense</a>
-					</Link>
-				</li>
+				{genres[selectedMediaType].map((genre) => (
+					<li>
+						<Link href={`/${selectedMediaType}/genre/${genre.id}`}>
+							{genre.title}
+						</Link>
+					</li>
+				))}
 			</ul>
 		</aside>
 	);

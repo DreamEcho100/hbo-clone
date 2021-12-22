@@ -27,6 +27,16 @@ const CreateUserComponent = (): JSX.Element => {
 		mainBackground: globalState.app.defaults.mainBackgrounds[0],
 	};
 	const [userData, setUserData] = useState(userDataDefault);
+	const [selectedMainBackground, setSelectedMainBackground] =
+		useState<mainBackgroundType>(
+			globalState.user.mainBackground
+				? globalState.user.mainBackground
+				: globalState.app.defaults.mainBackgrounds[
+						Math.floor(
+							Math.random() * globalState.app.defaults.mainBackgrounds.length
+						)
+				  ]
+		);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setUserData((prev) => ({
@@ -41,6 +51,7 @@ const CreateUserComponent = (): JSX.Element => {
 			...prev,
 			mainBackground: item,
 		}));
+		setSelectedMainBackground(item);
 	};
 
 	const saveUser = (event: React.SyntheticEvent) => {
@@ -66,13 +77,7 @@ const CreateUserComponent = (): JSX.Element => {
 				classes['create-user']
 			)}
 			style={{
-				background: globalState.user.mainBackground
-					? globalState.user.mainBackground
-					: globalState.app.defaults.mainBackgrounds[
-							Math.floor(
-								Math.random() * globalState.app.defaults.mainBackgrounds.length
-							)
-					  ],
+				background: selectedMainBackground,
 			}}
 		>
 			<header
@@ -124,19 +129,21 @@ const CreateUserComponent = (): JSX.Element => {
 						<label htmlFor='user-name-input-text'>Name</label>
 					</div>
 					<div className={joinClassNames(helpers.dFlex, classes.colors)}>
-						{globalState.app.defaults.mainBackgrounds.map((item: mainBackgroundType) => (
-							<div
-								className={`${classes.color} ${
-									userData.mainBackground === item ? classes.active : ''
-								}`}
-								style={{
-									backgroundColor: 'rgb(2,27,64)',
-									background: item,
-								}}
-								key={item}
-								onClick={() => handleSettingMainBackground(item)}
-							/>
-						))}
+						{globalState.app.defaults.mainBackgrounds.map(
+							(item: mainBackgroundType) => (
+								<div
+									className={`${classes.color} ${
+										userData.mainBackground === item ? classes.active : ''
+									}`}
+									style={{
+										backgroundColor: 'rgb(2,27,64)',
+										background: item,
+									}}
+									key={item}
+									onClick={() => handleSettingMainBackground(item)}
+								/>
+							)
+						)}
 					</div>
 				</div>
 			</form>
