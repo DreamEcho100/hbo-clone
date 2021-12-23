@@ -9,6 +9,7 @@ import { joinClassNames } from '@utils/v1/className';
 import helpers from '@styles/helpers.module.css';
 
 import Image from '@components/UI/V1/Image';
+import Slider from '@components/UI/V1/Slider';
 
 type thumbnailType = 'large-v' | 'small-v' | 'large-h' | 'small-h';
 
@@ -209,12 +210,23 @@ const MediaRow = ({
 					classes.thumbnails
 				)}
 			>
-				<ShowThumbnails
-					mediaType={mediaType}
-					loadingData={loadingData}
-					movies={movies}
-					type={type}
-				/>
+				<Slider
+					outerSliderClassName={joinClassNames(
+						classes.thumbnailsOuterSlider
+					)}
+					innerSliderClassName={joinClassNames(
+						helpers.dFlex,
+						helpers.xyCenter,
+						classes.thumbnailsInnerSlider
+					)}
+				>
+					<ShowThumbnails
+						mediaType={mediaType}
+						loadingData={loadingData}
+						movies={movies}
+						type={type}
+					/>
+				</Slider>
 			</div>
 		</div>
 	);

@@ -7,14 +7,19 @@
 	color: white;
 	margin-bottom: 1em;
 }
-.thumbnails {
-	flex-wrap: nowrap;
+.thumbnailsInnerSlider::-webkit-scrollbar,
+.thumbnailsOuterSlider::-webkit-scrollbar {
+	display: none;
+}
+.thumbnailsOuterSlider {
 	min-width: 100%;
 	width: calc(100vw - 7rem);
 	overflow-x: scroll;
 }
-.thumbnails::-webkit-scrollbar {
-	display: none;
+.thumbnailsInnerSlider {
+	width: 100%;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
 }
 
 .thumbnail {
