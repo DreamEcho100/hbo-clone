@@ -1,20 +1,22 @@
 export const setItem = (name: string, value: any): void => {
-	if ((value && typeof value === 'object') || Array.isArray(value))
+	if (
+		typeof value !== 'string'
+		// (value && typeof value === 'object') || Array.isArray(value)
+	)
 		localStorage.setItem(name, JSON.stringify(value));
 	else localStorage.setItem(name, value);
 };
 
-export const getItem = (name: string) => {
-	if (typeof window === 'undefined') return;
+export const getItem = <R>(name: string, defaultReturn: R): R => {
+	if (typeof window === 'undefined') return defaultReturn;
 
-	const item = localStorage.getItem(name);
+	const item: string | null = localStorage.getItem(name);
 	if (item) {
-		if (item.startsWith('{') || item.startsWith('['))
-			return JSON.parse(localStorage.getItem(name)!);
-		return localStorage.getItem(name);
+		if (item.startsWith('{') || item.startsWith('[')) return JSON.parse(item!);
+		return item as unknown as R;
 	}
 
-	return;
+	return defaultReturn;
 };
 
 export const checkItem = (name: string): boolean =>
