@@ -8,6 +8,7 @@ interface Props {
 
 interface IPosRef {
 	sliderDragAnimationID: number;
+	innerSliderMaskRefStyleEndId?: ReturnType<typeof setTimeout>;
 	isPointing: boolean;
 	isDragging: boolean;
 	oldXTranslate: number;
@@ -33,6 +34,7 @@ const Slider = ({
 
 	const posRef = useRef<IPosRef>({
 		sliderDragAnimationID: 0,
+		innerSliderMaskRefStyleEndId: undefined,
 		isPointing: false,
 		isDragging: false,
 		oldXTranslate: 0,
@@ -130,8 +132,11 @@ const Slider = ({
 		posRef.current.isPointing = false;
 		posRef.current.isDragging = false;
 		// outerSliderRef.current.style.cursor = 'grab';
-		innerSliderMaskRef.current.style.pointerEvents = 'none';
-		innerSliderMaskRef.current.style.cursor = 'grab';
+		posRef.current.innerSliderMaskRefStyleEndId = setTimeout(() => {
+			if (!innerSliderMaskRef.current) return;
+			innerSliderMaskRef.current.style.pointerEvents = 'none';
+			innerSliderMaskRef.current.style.cursor = 'grab';
+		}, 100);
 		cancelAnimationFrame(posRef.current.sliderDragAnimationID);
 	};
 
