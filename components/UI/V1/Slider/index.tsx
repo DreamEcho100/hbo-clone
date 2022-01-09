@@ -127,16 +127,14 @@ const Slider = ({
 		)
 			return;
 		
-			if (posRef.current.isDragging) {
-				event.preventDefault();
+			event.preventDefault();
 
-				posRef.current.isPointing = false;
-				posRef.current.isDragging = false;
-				// outerSliderRef.current.style.cursor = 'grab';
-				innerSliderMaskRef.current.style.pointerEvents = 'none';
-				innerSliderMaskRef.current.style.cursor = 'grab';
-				cancelAnimationFrame(posRef.current.sliderDragAnimationID);
-			}
+			posRef.current.isPointing = false;
+			posRef.current.isDragging = false;
+			// outerSliderRef.current.style.cursor = 'grab';
+			innerSliderMaskRef.current.style.pointerEvents = 'none';
+			innerSliderMaskRef.current.style.cursor = 'grab';
+			cancelAnimationFrame(posRef.current.sliderDragAnimationID);
 	};
 
 	const touchMove = (event: React.TouchEvent | React.MouseEvent) => {
