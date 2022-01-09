@@ -35,8 +35,8 @@ const MainLayout = ({ children }: Props): JSX.Element => {
 
 	useEffect(() => {
 		let loggedIn = false;
-		const activeUID: string = ls.check('activeUID') ? ls.get('activeUID') : '';
-		const users: any[] = ls.check('users') ? ls.get('users') : '';
+		const activeUID: string = ls.get('activeUID', '');
+		const users: any[] = ls.get('users', []);
 
 		if (
 			activeUID.length !== 0 &&

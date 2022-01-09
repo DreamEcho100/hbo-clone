@@ -22,8 +22,8 @@ import {
 } from './ts/interfaces';
 
 export const setUser = ({ dispatch }: SetUserInterface) => {
-	const users: any[] = ls.check('users') ? ls.get('users') : [];
-	const activeUID: string = ls.get('activeUID');
+	const users: any[] = ls.get<any[]>('users', []);
+	const activeUID: string = ls.get<string>('activeUID', '');
 
 	if (!activeUID) return;
 
@@ -34,14 +34,14 @@ export const setUser = ({ dispatch }: SetUserInterface) => {
 };
 
 export const createUser = ({ userData }: AddUserInterface) => {
-	const users: any[] = ls.check('users') ? ls.get('users') : [];
+	const users: any[] = ls.get<any[]>('users', []);
 
 	users.unshift(userData);
 	ls.set('users', users);
 };
 
 export const signOutUser = ({ dispatch }: SignOutUserInterface) => {
-	const activeUID = ls.check('activeUID') ? ls.get('activeUID') : '';
+	const activeUID: string = ls.get<string>('activeUID', '');
 	ls.delete('myWatchList');
 	ls.delete('activeUID');
 
@@ -51,8 +51,8 @@ export const signOutUser = ({ dispatch }: SignOutUserInterface) => {
 };
 
 export const removeUser = ({ dispatch }: RemoveUserInterface) => {
-	const activeUID = ls.check('activeUID') ? ls.get('activeUID') : '';
-	let users: any[] = ls.check('users') ? ls.get('users') : [];
+	const activeUID: string = ls.get<string>('activeUID', '');
+	let users: any[] = ls.get<any[]>('users', []);
 
 	users = users.filter((item: { id: string }) => item.id !== activeUID);
 
@@ -93,7 +93,7 @@ export const addItemToWatchList = ({
 	dispatch,
 	item,
 }: AddItemToWatchListInterface) => {
-	let myWatchList: any[] = ls.check('myWatchList') ? ls.get('myWatchList') : [];
+	let myWatchList: any[] = ls.get<any[]>('myWatchList', []);
 
 	if (
 		!myWatchList.find(
@@ -115,7 +115,7 @@ export const removeItemFromWatchList = ({
 	dispatch,
 	mediaId,
 }: RemoveItemFromWatchListInterface) => {
-	let myWatchList: any[] = ls.check('myWatchList') ? ls.get('myWatchList') : [];
+	let myWatchList: any[] = ls.get<any[]>('myWatchList', []);
 
 	if (myWatchList.length !== 0) {
 		myWatchList = myWatchList.filter(

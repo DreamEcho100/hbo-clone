@@ -55,7 +55,7 @@ const Login = (props: LoginPropsInterface): JSX.Element => {
 
 	const router = useRouter();
 	const [loadingUsers, setLoadingUsers] = useState(false);
-	const users = useMemo(() => (ls.check('users') ? ls.get('users') : []), []);
+	const users: any[] = useMemo(() => ls.get<any[]>('users', []), []);
 
 	const { hasMounted } = useMounted();
 

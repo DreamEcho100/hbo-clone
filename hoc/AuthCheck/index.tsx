@@ -11,17 +11,17 @@ const AuthCheck = (component: JSX.Element): JSX.Element => {
 
 	const { hasMounted } = useMounted();
 
-	let activeUID = ls.get('activeUID');
-	let users = ls.get('users') ? ls.get('users') : [];
+	let activeUID: string = ls.get<string>('activeUID', '');
+	let users: any[] = ls.get<any[]>('users', []);
 
 	useEffect(() => {
 		// if(users.length >= 1) {
 		//   router.push('/login')
 		// }
-		if (activeUID === null || users.length < 1) {
+		if (activeUID.length < 0 || users.length < 1) {
 			router.push('/create');
 		} else setUserExist(true);
-	}, [router]);
+	}, [activeUID.length, router, users.length]);
 
 	if (!hasMounted || !userExist) {
 		return (
