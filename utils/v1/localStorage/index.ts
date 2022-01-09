@@ -7,7 +7,7 @@ export const setItem = (name: string, value: any): void => {
 	else localStorage.setItem(name, value);
 };
 
-export const getItem = <R>(name: string, defaultReturn: R): R => {
+export const getItem = <R>(name: string, defaultReturn?: R): R | undefined => {
 	if (typeof window === 'undefined') return defaultReturn;
 
 	const item: string | null = localStorage.getItem(name);
