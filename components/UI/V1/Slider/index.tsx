@@ -8,6 +8,7 @@ interface Props {
 
 interface IPosRef {
 	sliderDragAnimationID: number;
+	isPointing: boolean;
 	isDragging: boolean;
 	oldXTranslate: number;
 	currXTranslate: number;
@@ -28,8 +29,11 @@ const Slider = ({
 }: Props) => {
 	const outerSliderRef = useRef<HTMLDivElement>(null);
 	const innerSliderRef = useRef<HTMLDivElement>(null);
+	const innerSliderMaskRef = useRef<HTMLDivElement>(null);
+
 	const posRef = useRef<IPosRef>({
 		sliderDragAnimationID: 0,
+		isPointing: false,
 		isDragging: false,
 		oldXTranslate: 0,
 		currXTranslate: 0,
@@ -107,32 +111,44 @@ const Slider = ({
 
 		if (!outerSliderRef.current) return;
 
-		posRef.current.isDragging = true;
+		posRef.current.isPointing = true;
 		posRef.current.oldXTranslate = getPositionX(event);
-		outerSliderRef.current.style.cursor = 'grabbing';
+		// posRef.current.isDragging = true;
+		// outerSliderRef.current.style.cursor = 'grabbing';
 	};
 
 	const touchEnd = (event: React.TouchEvent | React.MouseEvent) => {
 		// event.preventDefault();
 
 		if (
-			outerSliderRef.current &&
-			typeof posRef.current.sliderDragAnimationID === 'number'
-		) {
-			posRef.current.isDragging = false;
-			outerSliderRef.current.style.cursor = 'grab';
-			cancelAnimationFrame(posRef.current.sliderDragAnimationID);
-		}
+			!outerSliderRef.current ||
+			!innerSliderMaskRef.current ||
+			typeof posRef.current.sliderDragAnimationID !== 'number'
+		)
+			return;
+
+		posRef.current.isPointing = false;
+		posRef.current.isDragging = false;
+		// outerSliderRef.current.style.cursor = 'grab';
+		innerSliderMaskRef.current.style.pointerEvents = 'none';
+		innerSliderMaskRef.current.style.cursor = 'grab';
+		cancelAnimationFrame(posRef.current.sliderDragAnimationID);
 	};
 
 	const touchMove = (event: React.TouchEvent | React.MouseEvent) => {
 		event.preventDefault();
 
+		if (!innerSliderMaskRef.current) return;
+
 		if (
-			!posRef.current.isDragging ||
+			!posRef.current.isPointing ||
 			checkSliderBoundary(getPositionX(event) - posRef.current.oldXTranslate)
 		)
 			return;
+
+		innerSliderMaskRef.current.style.pointerEvents = 'auto';
+		innerSliderMaskRef.current.style.cursor = 'grabbing';
+		// innerSliderRef.style.cursor = 'grabbing';
 
 		posRef.current.currXTranslate = getPositionX(event);
 
@@ -159,8 +175,30 @@ const Slider = ({
 		>
 			<div
 				className={`inner-slider ${innerSliderClassName}`}
+				style={{
+					position: 'relative',
+				}}
 				ref={innerSliderRef}
 			>
+				<div
+					className='slider-inner-mask'
+					style={{
+						position: 'absolute',
+						top: '0',
+						left: '0',
+						width: '100%',
+						height: '100%',
+						pointerEvents: 'none',
+					}}
+					ref={innerSliderMaskRef}
+					onContextMenu={(event: React.MouseEvent<HTMLDivElement>) => {
+						event.preventDefault();
+						event.stopPropagation();
+						return false;
+						// if (posRef.current.isDragging) {
+						// }
+					}}
+				></div>
 				{children}
 			</div>
 		</div>
