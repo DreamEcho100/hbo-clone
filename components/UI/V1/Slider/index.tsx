@@ -190,6 +190,7 @@ const Slider = ({
 						position: 'absolute',
 						top: '0',
 						left: '0',
+						zIndex: '999',
 						width: '100%',
 						height: '100%',
 						pointerEvents: 'none',
