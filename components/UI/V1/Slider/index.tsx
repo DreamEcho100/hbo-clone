@@ -29,7 +29,7 @@ const Slider = ({
 }: Props) => {
 	const outerSliderRef = useRef<HTMLDivElement>(null);
 	const innerSliderRef = useRef<HTMLDivElement>(null);
-	const innerSliderMaskRef = useRef<HTMLDivElement>(null);
+	const outerSliderMaskRef = useRef<HTMLDivElement>(null);
 
 	const posRef = useRef<IPosRef>({
 		sliderDragAnimationID: 0,
@@ -122,25 +122,25 @@ const Slider = ({
 
 		if (
 			!outerSliderRef.current ||
-			!innerSliderMaskRef.current ||
+			!outerSliderMaskRef.current ||
 			typeof posRef.current.sliderDragAnimationID !== 'number'
 		)
 			return;
-		
-			event.preventDefault();
 
-			posRef.current.isPointing = false;
-			posRef.current.isDragging = false;
-			// outerSliderRef.current.style.cursor = 'grab';
-			innerSliderMaskRef.current.style.pointerEvents = 'none';
-			innerSliderMaskRef.current.style.cursor = 'grab';
-			cancelAnimationFrame(posRef.current.sliderDragAnimationID);
+		event.preventDefault();
+
+		posRef.current.isPointing = false;
+		posRef.current.isDragging = false;
+		// outerSliderRef.current.style.cursor = 'grab';
+		outerSliderMaskRef.current.style.pointerEvents = 'none';
+		outerSliderMaskRef.current.style.cursor = 'grab';
+		cancelAnimationFrame(posRef.current.sliderDragAnimationID);
 	};
 
 	const touchMove = (event: React.TouchEvent | React.MouseEvent) => {
 		event.preventDefault();
 
-		if (!innerSliderMaskRef.current) return;
+		if (!outerSliderMaskRef.current) return;
 
 		if (
 			!posRef.current.isPointing ||
@@ -148,8 +148,8 @@ const Slider = ({
 		)
 			return;
 
-		innerSliderMaskRef.current.style.pointerEvents = 'auto';
-		innerSliderMaskRef.current.style.cursor = 'grabbing';
+		outerSliderMaskRef.current.style.pointerEvents = 'auto';
+		outerSliderMaskRef.current.style.cursor = 'grabbing';
 		// innerSliderRef.style.cursor = 'grabbing';
 
 		posRef.current.currXTranslate = getPositionX(event);
@@ -174,34 +174,34 @@ const Slider = ({
 			onMouseLeave={touchEnd}
 			onTouchMove={touchMove}
 			onMouseMove={touchMove}
+			style={{
+				position: 'relative',
+			}}
 		>
 			<div
-				className={`inner-slider ${innerSliderClassName}`}
+				className='outer-slider_mask'
 				style={{
-					position: 'relative',
+					position: 'absolute',
+					top: '0',
+					left: '0',
+					zIndex: '999',
+					width: '100%',
+					height: '100%',
+					pointerEvents: 'none',
 				}}
+				ref={outerSliderMaskRef}
+				onContextMenu={(event: React.MouseEvent<HTMLDivElement>) => {
+					event.preventDefault();
+					event.stopPropagation();
+					return false;
+					// if (posRef.current.isDragging) {
+					// }
+				}}
+			></div>
+			<div
+				className={`inner-slider ${innerSliderClassName}`}
 				ref={innerSliderRef}
 			>
-				<div
-					className='slider-inner-mask'
-					style={{
-						position: 'absolute',
-						top: '0',
-						left: '0',
-						zIndex: '999',
-						width: '100%',
-						height: '100%',
-						pointerEvents: 'none',
-					}}
-					ref={innerSliderMaskRef}
-					onContextMenu={(event: React.MouseEvent<HTMLDivElement>) => {
-						event.preventDefault();
-						event.stopPropagation();
-						return false;
-						// if (posRef.current.isDragging) {
-						// }
-					}}
-				></div>
 				{children}
 			</div>
 		</div>
