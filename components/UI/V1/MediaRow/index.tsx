@@ -216,7 +216,6 @@ const MediaRow = ({
 					)}
 					innerSliderClassName={joinClassNames(
 						helpers.dFlex,
-						helpers.xyCenter,
 						classes.thumbnailsInnerSlider
 					)}
 				>

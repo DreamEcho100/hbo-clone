@@ -12,9 +12,9 @@ interface IImageComponentProps {
 	src: string;
 	alt?: string;
 	placeholder?: 'blur' | 'empty';
-	role: string;
+	role?: string;
 	blurDataURL?: string;
-	props: TExtraProps;
+	props?: TExtraProps;
 }
 
 const ImageComponent = ({

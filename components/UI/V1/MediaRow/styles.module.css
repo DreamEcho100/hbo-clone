@@ -19,6 +19,7 @@
 .thumbnailsInnerSlider {
 	width: 100%;
 	flex-wrap: nowrap;
+	align-items: center;
 	justify-content: flex-start;
 }
 

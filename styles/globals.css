@@ -373,6 +373,14 @@ code[data-code-inline='true'] {
 	overflow-y: hidden;
 }
 
+strong {
+	font-weight: bolder;
+}
+
+em {
+	font-style: italic;
+}
+
 @media screen and (max-width: 700px) {
 	:root {
 		/* font-size: 60%; */

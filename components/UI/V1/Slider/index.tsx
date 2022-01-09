@@ -28,7 +28,7 @@ const Slider = ({
 }: Props) => {
 	const outerSliderRef = useRef<HTMLDivElement>(null);
 	const innerSliderRef = useRef<HTMLDivElement>(null);
-	const posRef = useRef({
+	const posRef = useRef<IPosRef>({
 		sliderDragAnimationID: 0,
 		isDragging: false,
 		oldXTranslate: 0,
