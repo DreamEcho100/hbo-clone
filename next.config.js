@@ -13,6 +13,7 @@ module.exports = (phase) => {
 		env: {
 			TMDB_API_KEY: process.env.TMDB_API_KEY,
 		},
+		swcMinify: true,
 	};
 
 	if (phase === PHASE_DEVELOPMENT_SERVER) {

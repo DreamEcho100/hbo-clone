@@ -138,7 +138,7 @@ const SideNav = (props: Props): JSX.Element => {
 					</button>
 				</li>
 				{genres[selectedMediaType].map((genre) => (
-					<li>
+					<li key={`${selectedMediaType}-${genre}`}>
 						<Link href={`/${selectedMediaType}/genre/${genre.id}`}>
 							{genre.title}
 						</Link>
