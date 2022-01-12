@@ -39,7 +39,7 @@ interface MediaRowPropsInterface {
 	queryFilters: {
 		sort_by?: string;
 		primary_release_year?: number;
-		with_genres?: string;
+		with_genres?: string | number;
 		genres?: GenresUnits[];
 		language?: string;
 		include_adult?: boolean;
@@ -211,9 +211,7 @@ const MediaRow = ({
 				)}
 			>
 				<Slider
-					outerSliderClassName={joinClassNames(
-						classes.thumbnailsOuterSlider
-					)}
+					outerSliderClassName={joinClassNames(classes.thumbnailsOuterSlider)}
 					innerSliderClassName={joinClassNames(
 						helpers.dFlex,
 						classes.thumbnailsInnerSlider

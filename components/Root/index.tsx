@@ -49,8 +49,8 @@ const Root = (props: Props): JSX.Element => {
 				type='small-v'
 				endpoint='discover/movie'
 				queryFilters={{
-					// with_genres: 28,
-					genres: ['Action'],
+					with_genres: 28,
+					// genres: ['Action'],
 					include_adult: true,
 					include_video: true,
 					primary_release_year: new Date().getFullYear(), // 2021
@@ -61,8 +61,8 @@ const Root = (props: Props): JSX.Element => {
 				type='small-v'
 				endpoint='discover/movie'
 				queryFilters={{
-					// with_genres: 27,
-					genres: ['Horror'],
+					with_genres: 27,
+					// genres: ['Horror'],
 					include_adult: true,
 					include_video: true,
 					primary_release_year: new Date().getFullYear(), // 2021
@@ -73,8 +73,8 @@ const Root = (props: Props): JSX.Element => {
 				type='large-h'
 				endpoint='discover/movie'
 				queryFilters={{
-					// with_genres: 16,
-					genres: ['Animation'],
+					with_genres: 16,
+					// genres: ['Animation'],
 					include_adult: true,
 					include_video: true,
 					primary_release_year: new Date().getFullYear(), // 2021
@@ -85,8 +85,8 @@ const Root = (props: Props): JSX.Element => {
 				type='small-v'
 				endpoint='discover/movie'
 				queryFilters={{
-					// with_genres: 878,
-					genres: ['Science Fiction'],
+					with_genres: 878,
+					// genres: ['Science Fiction'],
 					include_adult: true,
 					include_video: true,
 					primary_release_year: new Date().getFullYear(), // 2021
