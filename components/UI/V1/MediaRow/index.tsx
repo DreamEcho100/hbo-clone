@@ -202,7 +202,15 @@ const MediaRow = ({
 
 	return (
 		<div className={`${classes['media-row']} ${classes[type]}`}>
-			<h3 className={classes.title}>{title}</h3>
+			<h3 className={classes.title}>
+				<Link href={`${mediaType}${
+					queryFilters.with_genres ? `/genre/${queryFilters.with_genres}` : ''
+				}`} passHref>
+					<a>
+						<strong>{title}</strong>
+					</a>
+				</Link>
+			</h3>
 			<div
 				className={joinClassNames(
 					helpers.dFlex,

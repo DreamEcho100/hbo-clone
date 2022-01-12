@@ -12,6 +12,7 @@ interface SingleMediaPageInterface {
 		id: string;
 		name: string;
 		mediaType: string;
+		overview: string;
 	};
 	query: {
 		id: string;
@@ -35,6 +36,8 @@ const SingleMediaPage = ({ mediaData, query }: SingleMediaPageInterface) => {
 				// type="single"
 				mediaType={query.mediaType}
 				mediaId={query.id}
+				overview={mediaData.overview}
+				showOverview={true}
 			/>
 			{/* <LazyLoad
 				offset={-400}

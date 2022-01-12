@@ -58,11 +58,11 @@
 	margin-bottom: 0.5em;
 }
 
-.location {
+/* .location {
 	font-weight: 300;
 	color: white;
 	margin-bottom: 1em;
-}
+} */
 
 .buttons {
 	align-items: center;
@@ -125,4 +125,11 @@
 	font-weight: 700;
 	border-radius: 2rem;
 	cursor: pointer;
+}
+
+/**/
+.overviewSection {
+	padding: 0em 0em 0em 3em;
+	margin: 1em auto;
+	color: #fff;
 }

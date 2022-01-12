@@ -10,12 +10,14 @@ import ImageComponent from '../Image';
 
 interface FeaturedMediaInterface {
 	title: string;
-	location?: string;
+	// location?: string;
 	mediaUrl: string;
 	linkUrl: string;
 	type?: 'front' | 'single';
 	mediaType?: 'movie' | 'tv';
 	mediaId: string | number;
+	overview?: string;
+	showOverview?: boolean;
 }
 
 interface ShowMediaInterface {
@@ -42,12 +44,14 @@ const ShowMedia = ({ type, mediaUrl }: ShowMediaInterface) => {
 
 const FeaturedMedia = ({
 	title,
-	location,
+	// location,
 	mediaUrl,
 	linkUrl,
 	type,
 	mediaType,
 	mediaId,
+	overview,
+	showOverview,
 }: FeaturedMediaInterface): JSX.Element => {
 	const router = useRouter();
 
@@ -76,78 +80,81 @@ const FeaturedMedia = ({
 	};
 
 	return (
-		<section className={classes['featured-media']}>
-			{/* <iframe
-				className={classes.video}
-				width='100%'
-				height='100%'
-				src={videoUrl} // 'https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
-				allow='accelerometer; autoplay; clipboard-write;encrypted-media; gyroscope; picture-in-picture'
-				allowFullScreen
-			/> */}
-			<ShowMedia type={type} mediaUrl={mediaUrl} />
+		<>
+			<section className={classes['featured-media']}>
+				<ShowMedia type={type} mediaUrl={mediaUrl} />
 
-			<div className={joinClassNames(helpers.dFlex, classes.bg)}>
-				<div className={classes.container}>
-					<div className={classes.title} onClick={clickedPlay}>
-						<h1>
-							{title}
-							{/* Mortal Combat */}
-						</h1>
-					</div>
-					<div
-						className={joinClassNames(
-							type === 'single' ? helpers.hideComp : '',
-							classes.playing
-						)}
-					>
-						<small>NOW PLAYING</small>
-					</div>
-					<div
-						className={joinClassNames(
-							type === 'single' ? helpers.hideComp : '',
-							classes.location
-						)}
-					>
-						<small>
-							{location}
-							{/* In theaters and on HBO MAX. Streaming throughout May 23. */}
-						</small>
-					</div>
-					<div className={joinClassNames(helpers.dFlex, classes.buttons)}>
-						<button
-							className={joinClassNames(
-								helpers.dFlex,
-								helpers.xyCenter,
-								classes['play-btn']
-							)}
-							onClick={clickedPlay}
-						>
-							<i className='fas fa-play' />
-						</button>
-						<button
-							className={`${classes['add-btn']} ${
-								type !== 'single' ? 'hideComp' : ''
-							}`}
-							onClick={() => clickedAdd()}
-						>
-							<i className='fas fa-plus' />
-						</button>
-						<button
+				<div className={joinClassNames(helpers.dFlex, classes.bg)}>
+					<div className={classes.container}>
+						<div className={classes.title} onClick={clickedPlay}>
+							<h1>
+								{title}
+								{/* Mortal Combat */}
+							</h1>
+						</div>
+						<div
 							className={joinClassNames(
 								type === 'single' ? helpers.hideComp : '',
-								helpers.dFlex,
-								helpers.xyCenter,
-								classes['info-btn']
+								classes.playing
 							)}
-							onClick={clickedPlay}
 						>
-							<small>MORE INFO</small>
-						</button>
+							<small>NOW PLAYING</small>
+						</div>
+						{/* <div
+							className={joinClassNames(
+								type === 'single' ? helpers.hideComp : '',
+								classes.location
+							)}
+						>
+							<small>
+								{location}
+							</small>
+						</div> */}
+						<div className={joinClassNames(helpers.dFlex, classes.buttons)}>
+							<button
+								className={joinClassNames(
+									helpers.dFlex,
+									helpers.xyCenter,
+									classes['play-btn']
+								)}
+								onClick={clickedPlay}
+							>
+								<i className='fas fa-play' />
+							</button>
+							<button
+								className={`${classes['add-btn']} ${
+									type !== 'single' ? 'hideComp' : ''
+								}`}
+								onClick={() => clickedAdd()}
+							>
+								<i className='fas fa-plus' />
+							</button>
+							<button
+								className={joinClassNames(
+									type === 'single' ? helpers.hideComp : '',
+									helpers.dFlex,
+									helpers.xyCenter,
+									classes['info-btn']
+								)}
+								onClick={clickedPlay}
+							>
+								<small>MORE INFO</small>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+			{showOverview && (
+				<section className={classes.overviewSection}>
+					<header>
+						<h2>Overview</h2>
+					</header>
+					<main>
+						<p>{overview}</p>
+					</main>
+				</section>
+			)}
+		</>
 	);
 };
 

@@ -130,13 +130,14 @@ const Slider = ({
 		if (posRef.current.isDragging) {
 			event.preventDefault();
 
-			posRef.current.isPointing = false;
 			posRef.current.isDragging = false;
 			// outerSliderRef.current.style.cursor = 'grab';
 			outerSliderMaskRef.current.style.pointerEvents = 'none';
 			outerSliderMaskRef.current.style.cursor = 'grab';
 			cancelAnimationFrame(posRef.current.sliderDragAnimationID);
 		}
+
+		posRef.current.isPointing = false;
 	};
 
 	const touchMove = (event: React.TouchEvent | React.MouseEvent) => {

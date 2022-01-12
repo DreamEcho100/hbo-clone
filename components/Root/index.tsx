@@ -14,11 +14,15 @@ const Root = (props: Props): JSX.Element => {
 				// mediaUrl='/movies/id'
 				mediaUrl='https://www.youtube.com/embed/NYH2sLid0Zc?autoplay=1&loop=1&start=16'
 				title='Mortal Kombat'
-				location='In theaters and on HBO MAX. Streaming throughout May 23.'
+				// location='In theaters and on HBO MAX. Streaming throughout May 23.'
 				linkUrl='/movie/460465'
 				type='front'
 				mediaType='movie'
 				mediaId={460465}
+				// overview={
+				// 	"Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe."
+				// }
+				// showOverview={false}
 			/>
 			{/* <MediaRow title='Movies' type='large-v' endpoint='api/movies/234' /> */}
 			<MediaRow

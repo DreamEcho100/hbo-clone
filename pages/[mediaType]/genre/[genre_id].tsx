@@ -16,6 +16,7 @@ interface MediaTypePageInterface {
 		title: string;
 		name: string;
 		results: string;
+		overview: string;
 	};
 	query: {
 		mediaType: 'tv' | 'movie';
@@ -77,6 +78,8 @@ const MediaTypePage = ({
 				linkUrl={`/${query.mediaType}/${featuredData.id}`}
 				type='single'
 				mediaId={featuredData.id}
+				overview={featuredData.overview}
+				showOverview={true}
 			/>
 			<GenreNav mediaType={query.mediaType} genresData={genresData} />
 
