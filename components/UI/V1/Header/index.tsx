@@ -60,7 +60,10 @@ const Header = (props: Props): JSX.Element => {
 					className={classes['user-img']}
 					src={
 						globalState.user.defaultImg ||
-						'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+						`https://avatars.dicebear.com/api/bottts/${
+							globalState.user.name || 'lol'
+						}.svg`
+						// 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
 					}
 					alt=''
 				/>

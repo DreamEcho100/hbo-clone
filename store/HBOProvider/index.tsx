@@ -7,7 +7,8 @@ export const initialState: InitialStateInterface = {
 	user: {
 		id: '',
 		name: '',
-		defaultImg: 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg',
+		defaultImg: `https://avatars.dicebear.com/api/bottts/lol.svg`,
+		// 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg',
 		watchList: [],
 		mainBackground: '',
 	},

@@ -70,7 +70,7 @@
 	font-size: var(--size-9);
 	font-weight: 700;
 	cursor: pointer;
-	transition: opacity 0.3 ease-in;
+	transition: opacity 0.3s ease-in;
 }
 /* 
 .buttons .adult {

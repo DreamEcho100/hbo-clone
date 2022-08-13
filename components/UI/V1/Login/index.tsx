@@ -22,6 +22,8 @@ const ShowUsers = ({
 	users,
 	selectUser,
 }: ShowUsersPropsInterface): JSX.Element => {
+	const [globalState, globalDispatch] = useSharedHBOState();
+
 	return (
 		<>
 			{users.map((user) => {
@@ -37,7 +39,12 @@ const ShowUsers = ({
 					>
 						<Image
 							className={classes['user-img']}
-							src='https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+							src={
+								`https://avatars.dicebear.com/api/bottts/${
+									globalState.user.name || 'lol'
+								}.svg`
+								// 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+							}
 							alt=''
 						/>
 						<div className={classes['user-name']}>{user.name}</div>
@@ -119,7 +126,11 @@ const Login = (props: LoginPropsInterface): JSX.Element => {
 				<button
 					className={
 						// classes.kid
-						classes.createUser
+						joinClassNames(
+							helpers.dFlex,
+							helpers.xyCenter,
+							classes.createUser
+						)
 					}
 					onClick={createUser}
 				>

@@ -104,7 +104,10 @@ const CreateUserComponent = (): JSX.Element => {
 					className={classes['img-container']}
 					src={
 						globalState.user.defaultImg ||
-						'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
+						`https://avatars.dicebear.com/api/bottts/${
+							globalState.user.name || 'lol'
+						}.svg`
+						// 'https://uifaces.co/our-content/donated/vIqzOHXj.jpg'
 					}
 					alt=''
 				/>
@@ -157,12 +160,23 @@ const CreateUserComponent = (): JSX.Element => {
 				)}
 			>
 				<button
-					className={classes.cancel}
+					className={joinClassNames(
+						helpers.dFlex,
+						helpers.xyCenter,
+						classes.cancel
+					)}
 					onClick={() => router.push('/login')}
 				>
 					Cancel
 				</button>
-				<button className={classes.save} onClick={saveUser}>
+				<button
+					className={joinClassNames(
+						helpers.dFlex,
+						helpers.xyCenter,
+						classes.save
+					)}
+					onClick={saveUser}
+				>
 					Save
 				</button>
 			</footer>
